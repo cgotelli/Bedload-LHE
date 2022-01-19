@@ -17,7 +17,23 @@ clear all;
 % Choose what method to use: all files inside the folder or just one specific file.
 ProcessingMode = 'all'; % "single" or "all"
 
-tic % Starts clock. It is used to know how long it takes to run the script.
+%%%% User defined parameters %%%%
+% These parameters must be estimated during the image calibration process previous to the sediment counter
+% calibration.
+
+GaussFilterSigma    = 0.5;      % Sigma value for Gauss's Filter
+FilterDiskSize      = 8;        % Disk size bothat filter
+DilatationDiskSize  = 0;        % Disk size for dilation function
+xdim    = 640;                  % Image's width
+ydim    = 480;                  % Image's height
+x_0     = 27;                   % bottom-left x-coordinate for cropping the image
+x_end   = 619;                  % top-right x-coordinate for cropping the image
+y_0     = 1;                    % bottom-left y-coordinate for cropping the image
+y_end   = 480;                  % top-right y-coordinate for cropping the image
+n       = 4;                    % number of cores to use
+
+
+tic                             % Starts clock. It is used to know how long it takes to run the script.
 
 % Main path where we the video files are stored.
 VideoPath = uigetdir('D:\Videos', 'Path where files-to-process are stored');
@@ -47,8 +63,6 @@ end
 % Before starts, it checks how many cores are in the pool. If the number is *zero*, it creates a pool with *n*
 % cores.
 
-n = 4; % number of cores to use
-
 p = gcp('nocreate'); % pool
 
 if isempty(p) && n~=1 % If it's empty and the number of cores is not set to one.
@@ -57,20 +71,7 @@ if isempty(p) && n~=1 % If it's empty and the number of cores is not set to one.
 
 end
 
-%% Filtering parameters
 
-% These parameters must be estimated during the image calibration process previous to the sediment counter
-% calibration.
-
-GaussFilterSigma    = 0.5;      % Sigma value for Gauss's Filter
-FilterDiskSize      = 8;        % Disk size bothat filter
-DilatationDiskSize  = 0;        % Disk size for dilation function
-xdim    = 2800;                  % Image's width
-ydim    = 1000;                  % Image's height
-x_0     = 27;                   % bottom-left x-coordinate for cropping the image
-x_end   = 619;                  % top-right x-coordinate for cropping the image
-y_0     = 1;                    % bottom-left y-coordinate for cropping the image
-y_end   = 480;                  % top-right y-coordinate for cropping the image
                                         
 %% Series loop over files
 % Parallel loop over all files in the folder
