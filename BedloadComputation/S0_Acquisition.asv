@@ -39,14 +39,9 @@ elseif flume == "Office"
     src.Brightness          = 127;
     src.Exposure            = -8;
     src.Contrast            = 32;
-    src.WhiteBalance        = 4000;
+    src.WhiteBalance    = 4001;
     vid.FramesPerTrigger    = 300;
     vid.TriggerRepeat       = Inf;
-    
-    vid.LoggingMode = 'disk';
-    diskLogger = VideoWriter('D:\Videos\office\BedloadComputation.avi', 'Uncompressed AVI');
-    vid.DiskLogger = diskLogger;
-    diskLogger.FrameRate = 30;
 
 elseif flume == "laptop"
 
@@ -74,4 +69,4 @@ end
 
 
 
-% stop(vid)
+
