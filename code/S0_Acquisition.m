@@ -38,6 +38,10 @@ elseif flume == "Office"
     src.Saturation          = 32;
     vid.FramesPerTrigger    = 300;
     vid.TriggerRepeat       = Inf;
+
+elseif flume == "laptop"
+
+    src.Gain = 192;
     
 elseif flume == "Halle"
 
