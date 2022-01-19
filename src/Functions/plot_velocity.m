@@ -1,4 +1,4 @@
-function plot_velocity(velocity,img,frame)
+function Plot_velocity(velocity,img,frame)
 
 v=velocity(velocity(:,1)==frame,:);
 img1=img(:,:,frame);

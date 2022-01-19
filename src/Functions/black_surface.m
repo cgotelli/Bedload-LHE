@@ -1,4 +1,4 @@
-function surf = black_surface(img,xdim,ydim,folder,filename)
+function surf = Black_surface(img,xdim,ydim,folder,filename)
 % Calculates the black area corresponding to the particles surface
 
 n = size(img, 3);

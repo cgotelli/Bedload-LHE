@@ -1,4 +1,4 @@
-function sed = sed_discharge_BS(mvel, particles, fps, height,width,BS, folder, filename)
+function sed = Sed_discharge_BS(mvel, particles, fps, height,width,BS, folder, filename)
 % Calculates the sediment discharge based in the black surface of particles
 % and on the mean velocity. The sediment discharge is calculated as:
 % Sed_load=alpha.BS.v_mean.fps/y_dim

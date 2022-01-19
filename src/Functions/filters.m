@@ -1,7 +1,7 @@
 %modifications: line 6-7 inversion of xdim and ydim (apparently images are stored in the opposite way as expected, line 9-10 and 17 addition of a line rgb2gray (images need to be in gray)
 
 %% Filtering images
-function [x] = filters(data, xdim,ydim, n, GaussFilterSigma,FilterDiskSize,DilatationDiskSize)
+function [x] = Filters(data, xdim,ydim, n, GaussFilterSigma,FilterDiskSize,DilatationDiskSize)
 % 
 x=false(ydim,xdim,n);
 %x = false(xdim,ydim,n);

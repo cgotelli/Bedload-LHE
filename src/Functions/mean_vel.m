@@ -1,4 +1,4 @@
-function [velocity,mvel] = mean_vel(final_particles, distMin, distMax, dt, difs_th, x_dev, folder, filename) %difs_th_M, difs_th_m,
+function [velocity,mvel] = Mean_vel(final_particles, distMin, distMax, dt, difs_th, x_dev, folder, filename) %difs_th_M, difs_th_m,
 % Calculates the velocity matching particles between frames i and (i+1). It returns the detail of all
 % particles matched and the also the mean velocity per frame.
 

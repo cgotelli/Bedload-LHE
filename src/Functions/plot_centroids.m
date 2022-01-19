@@ -1,4 +1,4 @@
-function plot_centroids(images, stats, number, single,fps)
+function Plot_centroids(images, stats, number, single,fps)
 % Plots images with each particle's centroid. It can plot a single image or a serie of images starting from a
 % selected frame and with a speed defined by the specified fps.
 % Inputs: 
