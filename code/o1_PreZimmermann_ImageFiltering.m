@@ -20,7 +20,7 @@ ProcessingMode = 'all'; % "single" or "all"
 tic % Starts clock. It is used to know how long it takes to run the script.
 
 % Main path where we the video files are stored.
-VideoPath = uigetdir('C:\Users\gotelli\Videos', 'Path where files-to-process are stored');
+VideoPath = uigetdir('D:\Videos', 'Path where files-to-process are stored');
 % VideoPath = 'D:\00. Codes\01. MATLAB\02. GSD method - code\03. Matthieu-final\data-halle';
 
 % Defines directory to use depending on the previously selected mode
