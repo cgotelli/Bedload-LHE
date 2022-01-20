@@ -60,9 +60,8 @@ elseif flume == "Halle"
     
 end 
 
-
-
 first_part = 'C:\Users\EPFL-LHE\Documents\MATLAB\videos_23_11\attempt13\attempt13_' ;
+
 extension = '.avi';
 
 
