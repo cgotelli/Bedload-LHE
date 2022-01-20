@@ -34,6 +34,8 @@ elseif flume == "Office"
     vid = videoinput('winvideo', 1, 'RGB24_640x480');
     src = getselectedsource(vid);
     
+    vid.FramesPerTrigger = 1800;
+    
     src.Gain                = 0;
     src.Saturation          = 32;
     src.Brightness          = 127;
