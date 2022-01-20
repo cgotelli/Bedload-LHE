@@ -21,7 +21,7 @@ if flume == "LESO"
     vid.DiskLogger          = diskLogger;
     vid.TriggerRepeat       = 2;
     
-elseif flume == "Office"
+elseif flume == "Office" % Logitech Webcam C210 (winvideo-1)
     
     vid = videoinput('winvideo', 1, 'RGB24_640x480');
     src = getselectedsource(vid);
@@ -37,16 +37,16 @@ elseif flume == "Office"
     vid.FramesPerTrigger    = 300;
     vid.TriggerRepeat       = Inf;
     
-    vid.LoggingMode = 'disk';
-    diskLogger = VideoWriter('D:\Videos\office\BedloadComputation.avi', 'Uncompressed AVI');
-    vid.DiskLogger = diskLogger;
-    diskLogger.FrameRate = 30;
+    vid.LoggingMode         = 'disk';
+    diskLogger              = VideoWriter('D:\Videos\office\BedloadComputation.avi', 'Uncompressed AVI');
+    vid.DiskLogger          = diskLogger;
+    diskLogger.FrameRate    = 30;
     
-elseif flume == "laptop"
+elseif flume == "laptop" % Clemente's ASUS
     
     src.Gain = 192;
     
-elseif flume == "Halle"
+elseif flume == "Halle" % Main channel parameters. To be calibrated.
     
     src.Gain = 192;
     
