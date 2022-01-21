@@ -1,4 +1,4 @@
-function [v, s] = InitiateVideo(xres, yres, yoffset, fps, fid, matfilesPath, saveFrames, framesPath)
+function [v, s] = InitiateVideo(xres, yres, yoffset, fps, fid, matfilesPath, saveFrames, framesPath, EachHowMany)
 
 % Check this link:
 % https://ch.mathworks.com/help/imaq/videoinput.html?searchHighlight=videoinput&s_tid=srchtitle
@@ -15,7 +15,7 @@ s = getselectedsource(v); % Return currently selected video source object
 v.FramesPerTrigger = inf; % How many frames get per trigger.
 
 v.ROIPosition = [0 yoffset xres yres-yoffset];
-v.FramesAcquiredFcnCount = 5*fps; % Number of frames stored in the memory needed to run the Callback Function "FramesAcquiredFcn".
+v.FramesAcquiredFcnCount = EachHowMany; % Number of frames stored in the memory needed to run the Callback Function "FramesAcquiredFcn".
 v.LoggingMode = 'memory'; % Where to store the temporal data: memory, disk or disk&memory.
  
 s.Brightness = 128;
@@ -29,6 +29,6 @@ s.Brightness = 128;
 % parallel to accelerate the process and be able to do it in real time.
 v.FramesAcquiredFcn = {@SaveFrames, fid, matfilesPath, saveFrames, framesPath}; % your normal callback code
 
-v.StopFcn = {@closing,fid}; % When the camera stops recording, triggers the '@closing' Function. It creates the sample Video and closes the logfile.
+v.StopFcn = {@closing, fid}; % When the camera stops recording, triggers the '@closing' Function. It creates the sample Video and closes the logfile.
 
 end

@@ -1,6 +1,9 @@
-function [savePath, mainFolder, matfilesPath, framesPath, fid] = FirstThings(n, c)
+function [savePath, mainFolder, matfilesPath, framesPath, fid] = FirstThings(n)
 
-savePath = fullfile(pwd,'RawData'); % Where to save the experiment's files
+c = clock;          % Saves the current date and time
+
+% savePath = fullfile(pwd,'RawData'); % Where to save the experiment's files
+savePath = uigetdir('D:\Videos\office', 'Select where to save the RAW images data');
 
 mainFolder = fullfile(savePath, strcat(sprintf('%d',c(1)), sprintf('%02.0f',c(2)), sprintf('%02.0f', ... 
     c(3)), sprintf('%02.0f', c(4)), sprintf('%02.0f', c(5)))); % Where to keep all the files
