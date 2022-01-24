@@ -1,23 +1,23 @@
-%% Zimmermann's Method - Image preprocessing
+%% Step 1 - Image filtering
 
 % This script applies the filtering to RAW images obtained from video acquisition. It works for several matfiles
 % in the same folder or for a single file.
 % It requires:
 % * FiltersFunction: function with all filters to be applied.
 % * Directory of the folder containing the videos
+% -----------------------------------------------------------------------------------------------------------
 
+close all;  % Close all windows
+clear all;  % Clear the workspace
+clc         % Clear console
 
-%% Working directories
-
-% Cleans and closes everything.
-clc;
-close all;
-clear all;
+%% Parameter definitions
+% We define the different parameters used by the functions.
 
 % Choose what method to use: all files inside the folder or just one specific file.
-ProcessingMode = 'all'; % "single" or "all"
+ProcessingMode = 'all'; % "select" or "all"
 
-%%%% User defined parameters %%%%
+% User defined parameters.
 % These parameters must be estimated during the image calibration process previous to the sediment counter
 % calibration.
 
@@ -31,62 +31,21 @@ x_end   = 619;                  % top-right x-coordinate for cropping the image
 y_0     = 1;                    % bottom-left y-coordinate for cropping the image
 y_end   = 480;                  % top-right y-coordinate for cropping the image
 n       = 4;                    % number of cores to use
-
-
-tic                             % Starts clock. It is used to know how long it takes to run the script.
-
-% Main path where we the video files are stored.
-VideoPath = uigetdir('D:\Videos', 'Path where files-to-process are stored');
-% VideoPath = 'D:\00. Codes\01. MATLAB\02. GSD method - code\03. Matthieu-final\data-halle';
-
-% Defines directory to use depending on the previously selected mode
-if strcmp(ProcessingMode,'single') % Only for one file
-    
-    file = 'attempt13_0001.avi'; % matfile's name
-    filenames = dir(fullfile(VideoPath, file)); % Full directory for the specific video
-    
-elseif strcmp(ProcessingMode, 'all') % For every matfile inside the 'RAW_matfile' folder
-    
-    filenames = dir(fullfile(VideoPath, '*.avi')); % Gets all the files with *.avi extension inside the folder.
-    
-end
-
-% Path for saving filtered images
-SavePath = fullfile(VideoPath, 'matfiles'); 
-
-% If the saving folder does not exist, it makes it
-if ~exist(SavePath, 'dir')
-    mkdir(SavePath)
-end
-
-%% Parallel computing setup
-% Before starts, it checks how many cores are in the pool. If the number is *zero*, it creates a pool with *n*
-% cores.
-
-p = gcp('nocreate'); % pool
-
-if isempty(p) && n~=1 % If it's empty and the number of cores is not set to one.
-    
-    p = parpool(n); % Creates parallel pool with *n* cores.
-
-end
-
-
                                         
 %% Series loop over files
 % Parallel loop over all files in the folder
 
 for j = 1:length(filenames)
     
-    VideoFilePath    = fullfile(VideoPath,strcat(filenames(j).name));   % name of the video
+    VideoFilePath    = fullfile(MatfilesPath,strcat(filenames(j).name));   % name of the video
     disp(filenames(j).name)                                             % print name in Command Window
-    v       = VideoReader(VideoFilePath);                               % open the video
-    d       = v.NumFrames;                                              % number of frames in the video
-    data    = zeros(ydim,xdim,d,'uint8');                               % assignation of memory
+    vid       = VideoReader(VideoFilePath);                               % open the video
+    dim       = vid.NumFrames;                                              % number of frames in the video
+    data    = zeros(ydim,xdim,dim,'uint8');                               % assignation of memory
     
-    for i=1:d
+    for i=1:dim
         
-        data(:,:,i) = readFrame(v);                                     %read frame by frame
+        data(:,:,i) = readFrame(vid);                                     %read frame by frame
     
     end
     
@@ -98,7 +57,7 @@ for j = 1:length(filenames)
         DilatationDiskSize);
     
     % Trim each picture to remove the borders and stores them in the given path
-    TrimImage(data_filtered, x_0, x_end, y_0, y_end, d, filenames(j).name, SavePath);    
+    TrimImage(data_filtered, x_0, x_end, y_0, y_end, dim, filenames(j).name, SavePath);    
     
 end
 

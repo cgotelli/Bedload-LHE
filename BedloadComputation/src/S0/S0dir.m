@@ -1,7 +1,7 @@
 % This function initializes all the folders, register the clock, starts the LogFile, and starts the parallel
 % pool if is not already running.
 
-function [savePath, mainFolder, matfilesPath, framesPath, fid] = FirstThings(n, saveFrames)
+function [savePath, mainFolder, matfilesPath, framesPath, fid] = S0dir(n, saveFrames)
 
 % Saves the current date and time
 c = clock;
@@ -15,7 +15,7 @@ mainFolder = fullfile(savePath, strcat(sprintf('%d',c(1)), sprintf('%02.0f',c(2)
 mkdir(mainFolder)
 
 % Inside this folder, it creates a subfolder where to store the matfiles of the images
-matfilesPath = fullfile(mainFolder, 'matfiles'); % Creates folder for mat-files
+matfilesPath = fullfile(mainFolder, 'RAW_matfiles'); % Creates folder for mat-files
 mkdir(matfilesPath)
 
 % If the saveframe option is yes, it also creates a folder to store the video frames in tif/jpeg/png format.
@@ -23,7 +23,8 @@ if saveFrames == 'y'
     
     framesPath = fullfile(mainFolder, 'frames'); % Creates folder for frames
     mkdir(framesPath)    
-    
+else 
+    framesPath = matfilesPath;
 end
 
 % Creates and open logfile inside the main RAW data folder.

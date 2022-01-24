@@ -1,4 +1,4 @@
-%% Image acquisition and processing
+%% S0 - Image acquisition
 % This is the step zero of the process: recording the images/frames of the particles passing through the
 % outlet of the flume. This code uses PARFEVAL (Parallel Computing Toolbox) to store the images from the
 % camera in *.mat format. It can be modified to include the filtering process (Step 1) in the same real-time
@@ -28,12 +28,12 @@ n   = 4;        % number of cores to use
 
 % Image acquisition
 fps         = 30;   % number of FPS
-saveFrames  = 'y';  % Want to save the original frames? (y or n)
+saveFrames  = 'n';  % Want to save the original frames? (y or n)
 EachHowMany = 5*fps;% How many frames will have each matfile. It depends on the occupied RAM memory.
 
 %% Prepare folders and LogFile
 
-[savePath, mainFolder, matfilesPath, framesPath, fid] = FirstThings(n, saveFrames);
+[savePath, mainFolder, matfilesPath, framesPath, fid] = S0dir(n, saveFrames);
 
 %% Videoinput object setup
 
