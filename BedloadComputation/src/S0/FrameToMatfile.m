@@ -1,4 +1,4 @@
-%% Exporting images as Matfile
+% Exporting images as Matfile
 
 function FrameToMatfile(data, matfilesPath, metadata)
 

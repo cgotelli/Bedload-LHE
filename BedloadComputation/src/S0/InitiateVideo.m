@@ -1,11 +1,13 @@
-function [v, s] = InitiateVideo(flume, fps, fid, matfilesPath, saveFrames, framesPath, EachHowMany)
-
+% 
+% 
 % Check this link:
 % https://ch.mathworks.com/help/imaq/videoinput.html?searchHighlight=videoinput&s_tid=srchtitle
 % to learn how this Matlab Object works. 
 % 
 % To know the name of the camera adaptor, check this other link:
 % https://ch.mathworks.com/help/imaq/imaqhwinfo.html
+
+function [vid, src] = InitiateVideo(flume, fps, fid, matfilesPath, saveFrames, framesPath, EachHowMany)
 
 
 if flume == "LESO"
@@ -23,10 +25,10 @@ if flume == "LESO"
     vid.DiskLogger          = diskLogger;
     vid.TriggerRepeat       = 2;
     
-elseif flume == "Office" % Logitech Webcam C210 (winvideo-1)
+elseif flume == "Office"    % Logitech Webcam C210 (winvideo-1)
     
-    v = videoinput('winvideo', 1, 'RGB24_640x480'); % Creates videoinput object
-    s = getselectedsource(v); % Return currently selected video source object
+    vid = videoinput('winvideo', 1, 'RGB24_640x480'); % Creates videoinput object
+    src = getselectedsource(vid); % Return currently selected video source object
     
     % Camera's resolution
     xres        = 640;  % Image's width
@@ -36,24 +38,20 @@ elseif flume == "Office" % Logitech Webcam C210 (winvideo-1)
     
     % Acquisition parameters
     % vid.ReturnedColorspace = 'grayscale';
-    v.FramesPerTrigger = inf; % How many frames get per trigger.
+    vid.FramesPerTrigger = inf; % How many frames get per trigger.
+    vid.ROIPosition = [0 yoffset xres yres-yoffset];
+    vid.FramesAcquiredFcnCount = EachHowMany; % Number of frames stored in the memory needed to run the Callback Function "FramesAcquiredFcn".
+    vid.LoggingMode = 'memory'; % Where to store the temporal data: memory, disk or disk&memory.
+    vid.FramesAcquiredFcn = {@SaveFrames, fid, matfilesPath, saveFrames, framesPath}; % your normal callback code
+    vid.StopFcn = {@closing, fid}; % When the camera stops recording, triggers the '@closing' Function. It creates the sample Video and closes the logfile.
     
-    v.ROIPosition = [0 yoffset xres yres-yoffset];
-    v.FramesAcquiredFcnCount = EachHowMany; % Number of frames stored in the memory needed to run the Callback Function "FramesAcquiredFcn".
-    v.LoggingMode = 'memory'; % Where to store the temporal data: memory, disk or disk&memory.
-    
-    s.Brightness = 128;
-    % s.Gain = 300;
-    % s.Shutter = 100;
-    % s.FrameRate = num2str(fps);
+    src.Brightness = 128;
     
     % The callback Function "FramesAcquiredFcn" triggers the '@processImage'
     % Function Handle when the number of frames specified before is reached.
     % This function is THE Function. It's in charge of processing the images in
     % parallel to accelerate the process and be able to do it in real time.
-    v.FramesAcquiredFcn = {@SaveFrames, fid, matfilesPath, saveFrames, framesPath}; % your normal callback code
     
-    v.StopFcn = {@closing, fid}; % When the camera stops recording, triggers the '@closing' Function. It creates the sample Video and closes the logfile.
         
 elseif flume == "laptop" % Clemente's ASUS
     
