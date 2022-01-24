@@ -1,7 +1,7 @@
 % This function initializes all the folders, register the clock, starts the LogFile, and starts the parallel
 % pool if is not already running.
 
-function [savePath, mainFolder, matfilesPath, framesPath, fid] = FirstThings(n)
+function [savePath, mainFolder, matfilesPath, framesPath, fid] = FirstThings(n, saveFrames)
 
 % Saves the current date and time
 c = clock;

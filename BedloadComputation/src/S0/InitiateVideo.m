@@ -55,7 +55,26 @@ elseif flume == "Office"    % Logitech Webcam C210 (winvideo-1)
         
 elseif flume == "laptop" % Clemente's ASUS
     
-    src.Gain = 192;
+    vid = videoinput('winvideo', 1, 'MJPG_1280x720');
+    vid.ReturnedColorspace = 'grayscale';
+    vid.FramesPerTrigger = Inf;
+    vid.LoggingMode = 'memory'; % Where to store the temporal data: memory, disk or disk&memory.
+    vid.FramesAcquiredFcnCount = EachHowMany; % Number of frames stored in the memory needed to run the Callback Function "FramesAcquiredFcn".
+    vid.FramesAcquiredFcn = {@SaveFrames, fid, matfilesPath, saveFrames, framesPath}; % your normal callback code
+    vid.StopFcn = {@closing, fid}; % When the camera stops recording, triggers the '@closing' Function. It creates the sample Video and closes the logfile.
+
+    src = getselectedsource(vid);
+    src.Brightness = 0;
+    src.Contrast = 50;
+    src.Exposure = -6;
+    src.Gamma = 300;
+    src.Saturation = 64;
+    src.Sharpness = 50;
+    src.BacklightCompensation = 'off';
+    src.WhiteBalanceMode = 'auto';
+    
+    
+    
     
 elseif flume == "Halle" % Main channel parameters. To be calibrated.
     
