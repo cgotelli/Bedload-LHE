@@ -15,7 +15,7 @@ imaqreset   % Clear all variables related to the videoinput object
 flume   = "Office"; % Options: LESO, Office, laptop, Halle.
 
 % Parallel process
-n       = 4;        % number of cores to use
+n   = 4;        % number of cores to use
 
 % Image acquisition
 fps         = 30;   % number of FPS
