@@ -21,7 +21,7 @@ imaqreset   % Clear all variables related to the videoinput object
 % We define the different parameters used by the functions.
 
 % What camera are we using?
-flume   = "office"; % Options: LESO, office, laptop, Halle. Edit InitiateVideo.m to add options.
+flume   = "laptop"; % Options: LESO, office, laptop, Halle. Edit InitiateVideo.m to add options.
 
 % Parallel process
 n   = 4;        % number of cores to use
