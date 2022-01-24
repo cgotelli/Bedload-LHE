@@ -18,7 +18,7 @@ clc         % Clear console
 FileType = 'matfile';
 
 % Choose which elements to process: "select" for specific ones, or "all" for everything inside a folder.
-ProcessingMode = 'select'; 
+ProcessingMode = 'all'; 
 
 % User defined parameters.
 % These parameters must be estimated during the image calibration process previous to the sediment counter
