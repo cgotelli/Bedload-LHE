@@ -11,7 +11,7 @@ close all;  % Close all windows
 clear all;  % Clear the workspace
 clc         % Clear console
 
-%% Parameter definitions
+%% Parameters definitions
 % We define the different parameters used by the functions.
 
 % Choose in what format are the RAW images: "matfile" or "video"
@@ -36,12 +36,11 @@ y_0     = 1;                    % bottom-left y-coordinate for cropping the imag
 y_end   = 480;                  % top-right y-coordinate for cropping the image
 
                                         
-%% Series loop over files
-
 % Determines files' directories & creates folder to export filtered images
 [filenames, filesPath, FilteredPath] = S1dir(n, FileType, ProcessingMode);
 
-% Filtering process
+%% Filtering process
+
 Filtering(filesPath, filenames, FileType, ProcessingMode, FilteredPath, ...
     xdim, ydim, x_0, x_end, y_0, y_end, ...
     GaussFilterSigma, FilterDiskSize, DilatationDiskSize)
