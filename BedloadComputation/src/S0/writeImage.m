@@ -2,11 +2,11 @@
 % saveImageData.
 % 
 
-function writeImage(data, n , fileName, relativeFrame, extension)
+function writeImage(data, n , filePath, relativeFrame, extension)
 
 for i = 1:n
     
-    fullFileName = fullfile(fileName, strcat('frame', sprintf(strcat('_%010d','.',extension), relativeFrame + i - 1)));
+    fullFileName = fullfile(filePath, strcat('frame', sprintf(strcat('_%010d','.',extension), relativeFrame + i - 1)));
     
     imwrite(data(:, :, :, i), fullFileName, extension);
     
