@@ -8,7 +8,7 @@ function [matfilespath, filenames,SavePath] = S2dir(mode, n)
 
 if strcmp(mode, 'single')
     
-    matfilespath = 'D:\00. Codes\01. MATLAB\02. GSD method - code\Matthieu-final\data13\matfiles\'; %'D:\LESO\doble_01\RAW_matfiles\Filtered\'; % Folder where the matfile is
+    matfilespath = 'D:\GitHub\Bedload-LHE\data\'; %'D:\LESO\doble_01\RAW_matfiles\Filtered\'; % Folder where the matfile is
     
     matfile = 'Filtered_attempt13_0001.mat'; %'Filtered_MatfileFrames_doble_01.mat'; % Matfile's name
     
@@ -16,7 +16,7 @@ if strcmp(mode, 'single')
     
 elseif strcmp(mode, 'all')
     
-    matfilespath = 'D:\00. Codes\01. MATLAB\02. GSD method - code\Matthieu-final\data13\matfiles\'; % Folder where the matfiles are
+    matfilespath = 'D:\GitHub\Bedload-LHE\data\'; % Folder where the matfiles are
     
     filenames = dir(fullfile(matfilespath, '*.mat')); % Search for all matfiles within specified directory
 

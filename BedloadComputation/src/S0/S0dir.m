@@ -7,7 +7,7 @@ function [savePath, mainFolder, matfilesPath, framesPath, fid] = S0dir(n, saveFr
 c = clock;
 
 % Asks for the directory where to store the RAW images.
-savePath = uigetdir('D:\Videos\office', 'Select where to save the RAW images data');
+savePath = uigetdir('D:\GitHub\Bedload-LHE\data', 'Select where to save the RAW images data');
 
 % In the given paths creates a folder with the starting time in the name
 mainFolder = fullfile(savePath, strcat(sprintf('%d',c(1)), sprintf('%02.0f',c(2)), sprintf('%02.0f', ...

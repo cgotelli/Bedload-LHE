@@ -12,14 +12,14 @@ if strcmp(FileType, 'matfile') % If we want to process matfiles
     
     if strcmp(ProcessingMode, 'select') % For selected matfiles
         
-        [filenames, filesPath] = uigetfile('D:\Videos\office\202201241217\RAW_matfiles', ...
+        [filenames, filesPath] = uigetfile('D:\GitHub\Bedload-LHE\data\', ...
             'Select matfiles to process', '*.mat', 'MultiSelect', 'on'); % Gets the names of the selected files, and stores them in a cell-type variable
         
     elseif strcmp(ProcessingMode, 'all') % For every matfile inside the 'RAW_matfile' folder
         
         % Main path where we the video files are stored.
         
-        filesPath = uigetdir('D:\Videos\office\202201241217\RAW_matfiles', 'Path where matfiles are stored');
+        filesPath = uigetdir('D:\GitHub\Bedload-LHE\data', 'Path where matfiles are stored');
         
         filenames = dir(fullfile(filesPath, '*.mat')); % Gets all the files with *.mat extension inside the folder, and stores the information in a struct-type variable
         
@@ -31,11 +31,11 @@ elseif strcmp(FileType, 'video') % If we want to process videos
     
     if strcmp(ProcessingMode, 'select') % For selected video files
         
-        [filenames, filesPath] = uigetfile('D:\Videos\LESO_test', '**', 'MultiSelect', 'on'); % Gets the names of the selected files, and stores them in a cell-type variable
+        [filenames, filesPath] = uigetfile('D:\GitHub\Bedload-LHE\data', '**', 'MultiSelect', 'on'); % Gets the names of the selected files, and stores them in a cell-type variable
         
     elseif strcmp(ProcessingMode, 'all') % For every matfile inside the 'RAW_matfile' folder
         
-        filesPath = uigetdir('D:\Videos\LESO_test', 'Path where matfiles are stored');
+        filesPath = uigetdir('D:\GitHub\Bedload-LHE\data', 'Path where matfiles are stored');
         filenames = dir(fullfile(filesPath, '*.avi')); % Gets all the files with *.avi extension inside the folder, and stores the information in a struct-type variable
         
     end
