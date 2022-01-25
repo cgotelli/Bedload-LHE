@@ -1,5 +1,5 @@
 %% Processing multiple images in parallel
-function SaveFrames(obj, ~, fid, matfilesPath, saveFrames, framesPath)
+function SaveFrames(obj, ~, fid, matfilesPath, saveFrames, framesPath, extension)
 
 % processImage is a Callback Function triggered by a videoinput
 % FramesAvailable event. It uses PARFEVAL (Parallel Computing Toolbox) to 
@@ -15,7 +15,7 @@ function SaveFrames(obj, ~, fid, matfilesPath, saveFrames, framesPath)
 if saveFrames == 'y'
     
     % INCLUDE OTHER FORMATS OPTIONS
-    writeTIFF(data, numel(metadata), framesPath, metadata(1).FrameNumber);
+    writeImage(data, numel(metadata), framesPath, metadata(1).FrameNumber, extension);
 
 end
 

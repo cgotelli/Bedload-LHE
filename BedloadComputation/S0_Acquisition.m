@@ -29,7 +29,8 @@ n   = 4;                % number of cores to use
 
 % Image acquisition
 fps         = 30;       % number of FPS
-saveFrames  = 'n';      % Want to save the original frames? (y or n)
+saveFrames  = 'y';      % Want to save the original frames? (y or n)
+extension   = 'bmp';   % Extension format for images to export: 'tiff', 'jpeg', 'bmp', 'png'
 EachHowMany = 5*fps;    % How many frames will have each matfile. It depends on the occupied RAM memory.
 
 %% Prepare folders and LogFile
@@ -38,7 +39,7 @@ EachHowMany = 5*fps;    % How many frames will have each matfile. It depends on 
 
 %% Videoinput object setup
 
-[vid, src] = InitiateVideo(flume, fps, fid, matfilesPath, saveFrames, framesPath, EachHowMany);
+[vid, src] = InitiateVideo(flume, fps, fid, matfilesPath, saveFrames, extension, framesPath, EachHowMany);
 
 %% Acquisition process
 
