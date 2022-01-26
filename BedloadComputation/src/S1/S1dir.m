@@ -15,6 +15,11 @@ if strcmp(FileType, 'matfile') % If we want to process matfiles
         [filenames, filesPath] = uigetfile('D:\GitHub\Bedload-LHE\data\', ...
             'Select matfiles to process', '*.mat', 'MultiSelect', 'on'); % Gets the names of the selected files, and stores them in a cell-type variable
         
+        % ERROR HANDLE "Please, select at least 2 files to process."
+        errordlg('Please, select at least 2 files to process.','Selection Error');
+        error('Please, select at least 2 files to process.')
+        
+        
     elseif strcmp(ProcessingMode, 'all') % For every matfile inside the 'RAW_matfile' folder
         
         % Main path where we the video files are stored.
@@ -31,7 +36,8 @@ elseif strcmp(FileType, 'video') % If we want to process videos
     
     if strcmp(ProcessingMode, 'select') % For selected video files
         
-        [filenames, filesPath] = uigetfile('D:\GitHub\Bedload-LHE\data', '**', 'MultiSelect', 'on'); % Gets the names of the selected files, and stores them in a cell-type variable
+        [filenames, filesPath] = uigetfile('D:\GitHub\Bedload-LHE\data', 'Select the videos to process', ...
+            '*.avi', 'MultiSelect', 'on'); % Gets the names of the selected files, and stores them in a cell-type variable
         
     elseif strcmp(ProcessingMode, 'all') % For every matfile inside the 'RAW_matfile' folder
         

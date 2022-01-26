@@ -4,31 +4,32 @@
 % folder where the filtered matfiles will be saved.
 %
 
-function [matfilespath, filenames,SavePath] = S2dir(mode, n)
+function [filesPath, filenames, SavePath] = S2dir(ProcessingMode, n)
 
-if strcmp(mode, 'single')
+if strcmp(ProcessingMode, 'select')
     
-    matfilespath = 'D:\GitHub\Bedload-LHE\data\'; %'D:\LESO\doble_01\RAW_matfiles\Filtered\'; % Folder where the matfile is
+    [filenames, filesPath] = uigetfile('D:\GitHub\Bedload-LHE\data\', ...
+        'Select Filtered matfiles to process', '*.mat', 'MultiSelect', 'on'); % Gets the names of the selected files, and stores them in a cell-type variable
     
-    matfile = 'Filtered_attempt13_0001.mat'; %'Filtered_MatfileFrames_doble_01.mat'; % Matfile's name
+    % ERROR HANDLE "Please, select at least 2 files to process."
+    errordlg('Please, select at least 2 files to process.','Selection Error');
+    error('Please, select at least 2 files to process.')
     
-    filenames = dir(fullfile(matfilespath, matfile)); % Full matfile's directory
+elseif strcmp(ProcessingMode, 'all')
     
-elseif strcmp(mode, 'all')
+    filesPath = uigetdir('D:\GitHub\Bedload-LHE\data', 'Path where Filtered matfiles are stored');
     
-    matfilespath = 'D:\GitHub\Bedload-LHE\data\'; % Folder where the matfiles are
+    filenames = dir(fullfile(filesPath, '*.mat')); % Gets all the files with *.mat extension inside the folder, and stores the information in a struct-type variable
     
-    filenames = dir(fullfile(matfilespath, '*.mat')); % Search for all matfiles within specified directory
-
 end
 
 % If the saving folder does not exist, makes it
-SavePath = fullfile(matfilespath, 'Particles');
+SavePath = fullfile(filesPath, 'Output');
 
 if ~exist(SavePath, 'dir')
     
     mkdir(SavePath)
-
+    
 end
 
 
@@ -42,7 +43,7 @@ p = gcp('nocreate');
 if isempty(p) && n~=1
     
     p = parpool(n);
-
+    
 end
 
 end

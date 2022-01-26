@@ -30,7 +30,7 @@ n   = 4;                % number of cores to use
 % Image acquisition
 fps         = 30;       % number of FPS
 saveFrames  = 'y';      % Want to save the original frames? (y or n)
-extension   = 'bmp';   % Extension format for images to export: 'tiff', 'jpeg', 'bmp', 'png'
+extension   = 'bmp';    % Extension format for images to export: 'tiff', 'jpeg', 'bmp', 'png'
 EachHowMany = 5*fps;    % How many frames will have each matfile. It depends on the occupied RAM memory.
 
 %% Prepare folders and LogFile
