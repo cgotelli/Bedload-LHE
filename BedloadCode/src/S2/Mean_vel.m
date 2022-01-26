@@ -68,5 +68,5 @@ for i = 1:num_frames-1 %For loop over the first n-1 frames.
 end
 %mvel = [mvel;num_frames, mvel(end,2:end)]; % Repeats last values for last frame
 
-save(fullfile(folder, strcat('FrameMeanVel_', filename)), 'mvel'); % save mean velocity 
+save(fullfile(folder, strcat('FrameMeanVel_', filename(10:end))), 'mvel'); % save mean velocity 
 end

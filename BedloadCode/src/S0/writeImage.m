@@ -8,7 +8,7 @@ for i = 1:n
     
     fullFileName = fullfile(filePath, strcat('frame', sprintf(strcat('_%010d','.',extension), relativeFrame + i - 1)));
     
-    imwrite(data(:, :, :, i), fullFileName, extension);
+    imwrite(data(:, :, :, i), fullFileName, extension); % Writes the image
     
 end
 

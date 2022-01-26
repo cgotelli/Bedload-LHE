@@ -14,5 +14,5 @@ for i = 1:num_frames-1 % Loop over all frames where the velocity has been comput
     sed = [sed; bedload];
 end
 
-save(fullfile(folder, strcat('Sed_', filename)), 'sed'); % save mean velocity
+save(fullfile(folder, strcat('Sed_', filename(10:end))), 'sed'); % save mean velocity
 end
