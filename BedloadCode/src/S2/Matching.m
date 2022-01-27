@@ -37,7 +37,7 @@ if strcmp(ProcessingMode, 'select') % For selected matfiles
                 
         BS = Black_surface(images, height, width, SavePath, filenames{j}); % Returns am array with the number of black pixels by frame
         
-        sed = Discharge_computation(mvel, particles_data, fps, height, width, BS, SavePath, ...
+        Discharge_computation(mvel, particles_data, fps, height, width, BS, SavePath, ...
             filenames{j}); % Computes the sediment rate per frame
         
         disp(strcat('We passed the sediment discharge computation' , " -------> " , filenames{j}))
