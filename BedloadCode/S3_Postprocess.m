@@ -1,8 +1,14 @@
-% o3_Zimmerman_Postprocess
-
+%% S3 - Post-processing
+%
+%
+%
+%
+% -----------------------------------------------------------------------------------------------------------
 
 clear all;
 close all;
+
+%% Parameters definition
 
 mode = 'all'; % "single" or "all" folders)
 fps = 60; % Image acquisition fps in the lab

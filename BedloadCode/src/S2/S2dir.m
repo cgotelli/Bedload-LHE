@@ -1,6 +1,7 @@
-% This function asks for the paths of the files to filter using a GUI. It can be done for specific files or
+% S2dir
+% - This function asks for the paths of the files to filter using a GUI. It can be done for specific files or
 % for all the files inside a folder.
-% It returns the list of names of the files to process, the folder where are stored and the path for the
+% - It returns the list of names of the files to process, the folder where are stored and the path for the
 % folder where the filtered matfiles will be saved.
 %
 
@@ -12,8 +13,10 @@ if strcmp(ProcessingMode, 'select')
         'Select Filtered matfiles to process', '*.mat', 'MultiSelect', 'on'); % Gets the names of the selected files, and stores them in a cell-type variable
     
     % ERROR HANDLE "Please, select at least 2 files to process."
-    errordlg('Please, select at least 2 files to process.','Selection Error');
-    error('Please, select at least 2 files to process.')
+    if ischar(filenames)
+        errordlg('Please, select at least 2 files to process.','Selection Error');
+        error('Please, select at least 2 files to process.')
+    end
     
 elseif strcmp(ProcessingMode, 'all')
     

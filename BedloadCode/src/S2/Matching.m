@@ -1,46 +1,46 @@
 % Matching
 % This function is the main part of the algorithm. It is in charge of the particle detection, match between
-% frames, mean particle velocity by frame
-%
+% frames, mean particle velocity by frame, total amount of pixels corresponding to particles, and the sediment
+% discharge computation.
 
 function Matching(filesPath, filenames, SavePath, ProcessingMode, minSize, distMinIsol, ...
     areamin, areamax, lim_width, lim_height, distMinVel, distMaxVel, difs_th, x_dev, fps)
+
+dt = 1/fps; % Delta time between frames.
 
 if strcmp(ProcessingMode, 'select') % For selected matfiles
     
     parfor j = 1:length(filenames)
         
         name    = fullfile(filesPath, filenames{j});
-        disp(filenames{j})
         images  = load(name);
         images  = images.data_filtered;
         tam     = size(images);                                             % Array's size
         height  = tam(1);                                                   % Image's height
         width   = tam(2);                                                   % Image's width
         
-        disp(strcat('Processing file:', " ", filenames{j}))        % Prints file name
+        disp(strcat('Processing file', " -------> ", filenames{j}))         % Prints file name
         
-        particle_info = Particles(images, minSize, SavePath, filenames{j});
+        particles_data = Particle_detection(images, minSize, SavePath, filenames{j}); % Detects all particles
         
-        disp(strcat('We passed the particle detection: ', " ", filenames{j}))
+        disp(strcat('We passed the particle detection', " -------> ", filenames{j}))
         
-        final_particles = Particles_Filtered(particle_info, height, width, distMinIsol, areamin, areamax, ...
-            lim_width, lim_height); % Requieres particles, image's size and distance threshold.
+        final_particles = Particle_filtering(particles_data, height, width, distMinIsol, areamin, areamax, ...
+            lim_width, lim_height); % Filter the best particles for computing mean particle's velocity.
         
-        disp(strcat('We passed the particle filtering:' , " " , filenames{j}))
+        disp(strcat('We passed the particle filtering' , " -------> " , filenames{j}))
         
-        [velocity, mvel] = Mean_vel(final_particles, distMinVel, distMaxVel, 1/60, difs_th, x_dev, ...
-            SavePath, filenames{j}); %difs_th_M, difs_th_m % Matrix with timestep and correspondent velocity
+        [~, mvel] = Mean_vel(final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...
+            SavePath, filenames{j}); % Computes velocity 
         
-        disp(strcat('We passed mean velocity computation: ' , " " , filenames{j}))
-        
-        Plot_velocity(velocity, images, 250);
+        disp(strcat('We passed mean velocity computation' , " -------> " , filenames{j}))
                 
-        BS = Black_surface(images, height, width, SavePath, filenames{j});
+        BS = Black_surface(images, height, width, SavePath, filenames{j}); % Returns am array with the number of black pixels by frame
         
-        sed = Sed_discharge_BS(mvel, particle_info, fps, height, width, BS, SavePath, filenames{j});
+        sed = Discharge_computation(mvel, particles_data, fps, height, width, BS, SavePath, ...
+            filenames{j}); % Computes the sediment rate per frame
         
-        disp(strcat('We passed the sediment discharge computation: ' , " " , filenames{j}))
+        disp(strcat('We passed the sediment discharge computation' , " -------> " , filenames{j}))
         
     end
     
@@ -49,37 +49,34 @@ elseif strcmp(ProcessingMode, 'all') % For all matfiles in the folder
     parfor j = 1:length(filenames)
         
         name    = fullfile(filesPath, filenames(j).name);
-        disp(filenames(j).name)
         images  = load(name);
         images  = images.data_filtered;
         tam     = size(images);                                             % Array's size
         height  = tam(1);                                                   % Image's height
         width   = tam(2);                                                   % Image's width
         
-        disp(strcat('Processing file: ' , " " , filenames(j).name))        % Prints file name
+        disp(strcat('Processing file' , " -------> " , filenames(j).name))
         
-        particle_info = Particles(images, minSize, SavePath, filenames(j).name);
+        particles_data = Particle_detection(images, minSize, SavePath, filenames(j).name); % Detects all particles
         
-        disp(strcat('We passed the particle detection: ' , " " , filenames(j).name))
+        disp(strcat('We passed the particle detection' , " -------> " , filenames(j).name))
                 
-        final_particles = Particles_Filtered(particle_info, height, width, distMinIsol, areamin, areamax, ...
-            lim_width, lim_height); % Requieres particles, image's size and distance threshold.
+        final_particles = Particle_filtering(particles_data, height, width, distMinIsol, areamin, areamax, ...
+            lim_width, lim_height); % Filter the best particles for computing mean particle's velocity.
         
-        disp(strcat('We passed the particle filtering: ' , " " , filenames(j).name))
+        disp(strcat('We passed the particle filtering' , " -------> " , filenames(j).name))
                 
-        [velocity, mvel] = Mean_vel(final_particles, distMinVel, distMaxVel,1/60, difs_th, x_dev, ...
-            SavePath, filenames(j).name); %difs_th_M, difs_th_m % Matrix with timestep and correspondent velocity
+        [~, mvel] = Mean_vel(final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...
+            SavePath, filenames(j).name); % Computes velocity and returns the mean velocity in an array
         
-        disp(strcat('We passed the mean velocity computation: ' , " " , filenames(j).name))
+        disp(strcat('We passed the mean velocity computation' , " -------> " , filenames(j).name))
         
-        Plot_velocity(velocity, images, 250);
+        BS = Black_surface(images, height, width, SavePath, filenames(j).name); % Returns am array with the number of black pixels by frame
         
-        BS = Black_surface(images, height, width, SavePath, filenames(j).name);
+        Discharge_computation(mvel, particles_data, fps, height, width, BS, SavePath, ...
+            filenames(j).name); % Computes the sediment rate per frame
         
-        sed = Sed_discharge_BS(mvel, particle_info, fps, height, width, BS, SavePath, ...
-            filenames(j).name);
-        
-        disp(strcat('We passed the sediment discharge computation: ' , " " , filenames(j).name))
+        disp(strcat('We passed the sediment discharge computation' , " -------> " , filenames(j).name))
                 
     end
     

@@ -1,15 +1,20 @@
-function surf = Black_surface(img, xdim, ydim, folder, filename)
+% Black_surface
 % Calculates the black area corresponding to the particles surface
+% - It receives the array of filtered images, the resolution of images, the folder's path where to export the
+% information, and the name of the file to process.
 
-n = size(img, 3);
+function black_surface = Black_surface(filtered_images, xdim, ydim, SavePath, filename)
 
-surf = []; % Empty sediment information array
+n = size(filtered_images, 3);   % Total number of frames to process
 
-for i = 1:n % Loop over all frames
+black_surface = zeros(n, 1);       % Empty array for storing information
+
+for i = 1:n                     % Loop over all frames
     
-    surf(i)=xdim*ydim-sum(sum(img(:,:,i)));
+    black_surface(i, 1)= xdim*ydim - sum(sum(filtered_images(:, :, i))); % Number of pixels - Number of white pixels
     
 end
 
-save(fullfile(folder, strcat('BS_', filename(10:end))), 'surf'); % save black surface 
+save(fullfile(SavePath, strcat('BS_', filename(10: end))), 'black_surface'); % Saves black surface array
+
 end
