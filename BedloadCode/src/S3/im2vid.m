@@ -1,5 +1,6 @@
-function im2vid(images,fps,savepath,name)
-v = VideoWriter(fullfile(savepath,[name,'.avi']));
+
+function im2vid(images, fps, SavePath, name)
+v = VideoWriter(fullfile(SavePath,[name,'.avi']));
 v.FrameRate = fps;
 open(v);
 figure(1)

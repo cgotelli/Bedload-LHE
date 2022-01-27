@@ -33,6 +33,7 @@ n           = 4;            % number of cores to use
 [matfilespath, filenames, SavePath] = S2dir(ProcessingMode, n);
 
 %% Matching execution
+
 tic
 
 Matching(matfilespath, filenames, SavePath, ProcessingMode, minSize, distMinIsol, ...
