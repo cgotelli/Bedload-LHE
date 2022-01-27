@@ -14,8 +14,10 @@ if strcmp(ProcessingMode, 'select')
     
     % ERROR HANDLE "Please, select at least 2 files to process."
     if ischar(filenames)
+        
         errordlg('Please, select at least 2 files to process.','Selection Error');
         error('Please, select at least 2 files to process.')
+        
     end
     
 elseif strcmp(ProcessingMode, 'all')
