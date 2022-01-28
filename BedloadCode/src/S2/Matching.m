@@ -3,8 +3,9 @@
 % frames, mean particle velocity by frame, total amount of pixels corresponding to particles, and the sediment
 % discharge computation.
 
-function Matching(filesPath, filenames, SavePath, ProcessingMode, minSize, distMinIsol, ...
-    areamin, areamax, lim_width, lim_height, distMinVel, distMaxVel, difs_th, x_dev, fps)
+function Matching(filesPath, filenames, SavePath, ProcessingMode, skip, minSize,...
+    distMinIsol, areamin, areamax, lim_width, lim_height, distMinVel, distMaxVel, difs_th, x_dev, ...
+    fps, imheight, imwidth)
 
 dt = 1/fps; % Delta time between frames.
 
@@ -16,8 +17,8 @@ if strcmp(ProcessingMode, 'select') % For selected matfiles
         images  = load(name);
         images  = images.data_filtered;
         tam     = size(images);                                             % Array's size
-        height  = tam(1);                                                   % Image's height
-        width   = tam(2);                                                   % Image's width
+%         imheight  = tam(1);                                                   % Image's height
+%         imwidth   = tam(2);                                                   % Image's width
         
         disp(strcat('Processing file', " -------> ", filenames{j}))         % Prints file name
         
@@ -25,39 +26,34 @@ if strcmp(ProcessingMode, 'select') % For selected matfiles
         
         disp(strcat('We passed the particle detection', " -------> ", filenames{j}))
         
-        final_particles = Particle_filtering(particles_data, height, width, distMinIsol, areamin, areamax, ...
+        final_particles = Particle_filtering(particles_data, imheight, imwidth, distMinIsol, areamin, areamax, ...
             lim_width, lim_height); % Filter the best particles for computing mean particle's velocity.
         
         disp(strcat('We passed the particle filtering' , " -------> " , filenames{j}))
         
-        [~, mvel] = Mean_vel(final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...
+        Mean_vel(final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...
             SavePath, filenames{j}); % Computes velocity 
         
         disp(strcat('We passed mean velocity computation' , " -------> " , filenames{j}))
                 
-        BS = Black_surface(images, height, width, SavePath, filenames{j}); % Returns am array with the number of black pixels by frame
-        
-        Discharge_computation(mvel, particles_data, fps, height, width, BS, SavePath, ...
-            filenames{j}); % Computes the sediment rate per frame
-        
-        disp(strcat('We passed the sediment discharge computation' , " -------> " , filenames{j}))
+        Black_surface(images, imheight, imwidth, SavePath, filenames{j}); % Returns am array with the number of black pixels by frame
         
     end
     
 elseif strcmp(ProcessingMode, 'all') % For all matfiles in the folder
     
     parfor j = 1:length(filenames)
-%         disp(srtcat("Starting with: ", j))
+
         name    = fullfile(filesPath, filenames(j).name);
         images  = load(name);
         images  = images.data_filtered;
         tam     = size(images);                                             % Array's size
-        height  = tam(1);                                                   % Image's height
-        width   = tam(2);                                                   % Image's width
+%         imheight  = tam(1);                                                   % Image's height
+%         imwidth   = tam(2);                                                   % Image's width
         
         disp(strcat(num2str(j), " Processing file -------> " , filenames(j).name))
         
-        if mod(j, 3) == 0 || j == 1
+        if mod(j, skip) == 0 || j == 1
             
             disp(strcat(num2str(j), " Starting complete process for: ", " -----> ", filenames(j).name))
             
@@ -65,7 +61,7 @@ elseif strcmp(ProcessingMode, 'all') % For all matfiles in the folder
             
             disp(strcat(num2str(j), " We passed the particle detection -------> " , filenames(j).name))
             
-            final_particles = Particle_filtering(particles_data, height, width, distMinIsol, areamin, areamax, ...
+            final_particles = Particle_filtering(particles_data, imheight, imwidth, distMinIsol, areamin, areamax, ...
                 lim_width, lim_height); % Filter the best particles for computing mean particle's velocity.
             
             disp(strcat(num2str(j), " We passed the particle filtering -------> " , filenames(j).name))
@@ -75,25 +71,20 @@ elseif strcmp(ProcessingMode, 'all') % For all matfiles in the folder
             
             disp(strcat(num2str(j), " We passed the mean velocity computation -------> " , filenames(j).name))
             
-            BS = Black_surface(images, height, width, SavePath, filenames(j).name); % Returns am array with the number of black pixels by frame
+            Black_surface(images, imheight, imwidth, SavePath, filenames(j).name); % Returns am array with the number of black pixels by frame
             
             disp(strcat(num2str(j), " Done with complete process for: "," -----> ", filenames(j).name))
             
         else
             disp(strcat(num2str(j), " Starting partial process for: ", " -----> ", filenames(j).name))
-            BS = Black_surface(images, height, width, SavePath, filenames(j).name); % Returns am array with the number of black pixels by frame
+            Black_surface(images, imheight, imwidth, SavePath, filenames(j).name); % Returns am array with the number of black pixels by frame
             disp(strcat(num2str(j), " Done with partial process for: ", " -----> ", filenames(j).name))
         end
-        
-%         Discharge_computation(mvel, particles_data, fps, height, width, BS, SavePath, ...
-%             filenames(j).name); % Computes the sediment rate per frame
-%         
-%         disp(strcat('We passed the sediment discharge computation' , " -------> " , filenames(j).name))
         
     end
     
 end
 
-disp('End of the matching and bed load computation process.')
+disp('End of the matching and velocity computation process.')
 
 end
