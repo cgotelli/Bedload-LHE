@@ -10,7 +10,7 @@
 % parameters: [image index; area; x; y; MajorAxis; Minor Axis]
 
 function final_particles = Particle_filtering(particles_array, height, width, distMin, areamin, areamax, ...
-    lim_width,lim_height)
+    lim_width, lim_height, maxparticles)
 
 
 num_frames  = particles_array(end, 1);            % Total number of frames to process
@@ -27,7 +27,7 @@ filtered_particles = filtered_particles(filtered_particles(:,4) < (1-lim_height)
 filtered_particles = filtered_particles(filtered_particles(:,2) < maxSize,:);
 filtered_particles = filtered_particles(filtered_particles(:,2) > minSize,:);
 
-
+% tic
 if isempty(filtered_particles)
     
     for h = 1:num_frames
@@ -40,7 +40,7 @@ else
     
     for h = 1:num_frames
         
-        if isempty(filtered_particles(filtered_particles(1,:) == h))
+        if isempty(filtered_particles(filtered_particles(:, 1) == h))
             
             filtered_particles = [filtered_particles; h, 0, 0, 0, 0, 0];
             
@@ -69,6 +69,7 @@ for h = 1:num_frames % Loop over all frames
         filtered_particles(filtered_particles(:, 1) == h, 3:4), distMin);
     % Once it has the list of those particles, selects all the rest.
     
+    aux2 = 0;
     % Loop over each particle within the image.
     for k = 1:length(D)
         % Gets the number of particles within the range. It's at least 1, because the particle itself it's
@@ -78,8 +79,15 @@ for h = 1:num_frames % Loop over all frames
         if tam(2) == 1 % If there is only one particle inside the circle (the particle itself), it saves the data.
             
             final_particles = [final_particles; filtered_particles(k+aux, 1:6)];  %19/10/2021 modif to return also minor and major axis lengths
-            
+            aux2 = aux2 + 1;
         end
+        
+        if aux2 == maxparticles
+            
+            break
+            
+        end 
+        
     end
     
     aux = aux + length(D); % updates the particle's position index

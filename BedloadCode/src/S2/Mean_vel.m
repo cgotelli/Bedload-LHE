@@ -39,7 +39,7 @@ for i = 1:num_frames-1                  % For loop over the first n-1 frames.
             % you have a match.
             if abs(difs) < difs_th && ... 
                     igrec1(j) + distMin <igrec2(k) && ... 
-                    abs(iks1(j)-iks2(k)) < x_dev%10 % This 10 it's to be sure that we have "straight" paths %10 is replaced by x_dev
+                    abs(iks1(j)-iks2(k)) < x_dev%10 % This 10 it's to be sure that we have "straight" paths
                 % If there is a match, you calculate the distance between centroids. This distance is in px!.
                 
                 distance = pdist([iks1(j), igrec1(j); iks2(k), igrec2(k)], 'euclidean');

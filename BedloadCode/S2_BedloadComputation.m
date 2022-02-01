@@ -31,6 +31,7 @@ n           = 4;            % number of cores to use
 skip        = 5;            % number of matfiles to skip for velocity computation. One each "skip" files.
 imheight    = 480;          % image height
 imwidth     = 640;          % image width
+maxparticles= 15;
 
 % Determines files' directories & creates folder to export filtered images
 [filesPath, filenames, SavePath] = S2dir(ProcessingMode, n);
@@ -41,7 +42,7 @@ tic
 
 Matching(filesPath, filenames, SavePath, ProcessingMode, skip, minSize, distMinIsol, ...
     areamin, areamax, lim_width, lim_height, distMinVel, distMaxVel, difs_th, x_dev, fps,...
-    imheight, imwidth);
+    imheight, imwidth, maxparticles);
 
 Discharge_computation(SavePath, fps, imheight, imwidth); 
 
