@@ -42,7 +42,7 @@ if strcmp(ProcessingMode, 'select') % For selected matfiles
     
 elseif strcmp(ProcessingMode, 'all') % For all matfiles in the folder
     
-    parfor j = 1:length(filenames)
+    for j = 1:length(filenames)
 
         name    = fullfile(filesPath, filenames(j).name);
         images  = load(name);
@@ -56,14 +56,14 @@ elseif strcmp(ProcessingMode, 'all') % For all matfiles in the folder
         if mod(j, skip) == 0 || j == 1
             
             disp(strcat(num2str(j), " Starting complete process for: ", " -----> ", filenames(j).name))
-            
+            tic
             particles_data = Particle_detection(images, minSize, SavePath, filenames(j).name); % Detects all particles
-            
+            toc
             disp(strcat(num2str(j), " We passed the particle detection -------> " , filenames(j).name))
-            
+            tic
             final_particles = Particle_filtering(particles_data, imheight, imwidth, distMinIsol, areamin, areamax, ...
                 lim_width, lim_height); % Filter the best particles for computing mean particle's velocity.
-            
+            toc
             disp(strcat(num2str(j), " We passed the particle filtering -------> " , filenames(j).name))
             
             Mean_vel(final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...

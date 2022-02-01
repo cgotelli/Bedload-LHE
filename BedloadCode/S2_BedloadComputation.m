@@ -27,10 +27,11 @@ difs_th     = 0.05;         % logarithmic size threshold for identifying two sim
 x_dev       = 10;           % maximum allowed value of horizontal deviation between two consecutive images (in px).
 lim_width   = 0.05;         % fraction of the image to exclude in the x axis for each border.
 lim_height  = 0.05;         % fraction of the image to exclude in the y axis for each border.
-n           = 4;            % number of cores to use
+n           = 1;            % number of cores to use
 skip        = 5;            % number of matfiles to skip for velocity computation
-imheight    = 480; 
-imwidth     = 640;
+imheight    = 480;          % image height
+imwidth     = 640;          % image width
+
 % Determines files' directories & creates folder to export filtered images
 [filesPath, filenames, SavePath] = S2dir(ProcessingMode, n);
 
