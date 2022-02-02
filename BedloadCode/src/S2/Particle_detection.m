@@ -10,9 +10,7 @@ function [particles] = Particle_detection(img_array, low_boundary, SavePath, fil
 
 % If it is a single image
 if size(img_array, 3) == 1
-    
-%     disp(strcat("Starting particle detection", " -------> ", filename)) % Prints a message
-    
+        
     img = img_array;                            % Assigns the input array
     img = bwareaopen(img, low_boundary);        % Removes small objects from image smaller than "low_boundary" number of pixels.
     img = imclearborder(img, 8);                % Supress points touching the borders of the image
@@ -28,8 +26,6 @@ if size(img_array, 3) == 1
 else
     
     % If it is more than one image (an array of images)
-%     disp(strcat("Starting particle detection", " -------> ", filename))   % Prints a message
-    
     particles = [];                                 % Empty array for particles
     
     for i = 1:size(img_array, 3)                    % Loop over images
