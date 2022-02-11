@@ -22,14 +22,14 @@ imaqreset   % Clear all variables related to the videoinput object
 % We define the different parameters used by the functions.
 
 % What camera are we using?
-flume   = "office";     % Options: LESO, office, laptop, Halle. Edit InitiateVideo.m to add options.
+flume   = "Halle";     % Options: LESO, office, laptop, Halle. Edit InitiateVideo.m to add options.
 
 % Parallel process
 n   = 4;                % number of cores to use
 
 % Image acquisition
 fps         = 30;       % number of FPS
-saveFrames  = 'y';      % Want to save the original frames? (y or n)
+saveFrames  = 'n';      % Want to save the original frames? (y or n)
 extension   = 'bmp';    % Extension format for images to export: 'tiff', 'jpeg', 'bmp', 'png'
 EachHowMany = 5*fps;    % How many frames will have each matfile. It depends on the occupied RAM memory.
 
