@@ -96,17 +96,16 @@ elseif flume == "Halle" % Main channel parameters. To be calibrated.
     %     yoffset     = 0;    % yoffset + ydim = total picture height
     vid = videoinput('gentl', 1, 'Mono8');
     src = getselectedsource(vid);
+
     src.AcquisitionFrameRate = fps;
     
     vid.ROIPosition = [648 738 2548 1415];
-
-    %vid.ReturnedColorspace = 'grayscale';
     vid.FramesPerTrigger = Inf;
     vid.ReturnedColorspace = 'grayscale';
     vid.LoggingMode = 'memory'; 
-    vid.FramesAcquiredFcnCount = EachHowMany; % Number of frames stored in the memory needed to run the Callback Function "FramesAcquiredFcn".
-    vid.FramesAcquiredFcn = {@SaveFrames, fid, matfilesPath, saveFrames, framesPath, extension}; % your normal callback code
-    vid.StopFcn = {@closing, fid}; % When the camera stops recording, triggers the '@closing' Function. It creates the sample Video and closes the logfile.
+    vid.FramesAcquiredFcnCount = EachHowMany; % Number of frames stored in the RAM memory required to trigger the Callback Function "FramesAcquiredFcn".
+    vid.FramesAcquiredFcn = {@SaveFrames, fid, matfilesPath, saveFrames, framesPath, extension}; % Definition of actions when FramesAcquiredFcn condition is reached.
+    vid.StopFcn = {@closing, fid}; % When the camera stops recording, triggers the '@closing' Function. It closes the logfile.
 
 
 end
