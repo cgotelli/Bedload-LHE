@@ -28,10 +28,10 @@ flume   = "Halle";     % Options: LESO, office, laptop, Halle. Edit InitiateVide
 n   = 4;                % number of cores to use
 
 % Image acquisition
-fps         = 30;       % number of FPS
+fps         = 15;       % number of FPS
 saveFrames  = 'n';      % Want to save the original frames? (y or n)
 extension   = 'bmp';    % Extension format for images to export: 'tiff', 'jpeg', 'bmp', 'png'
-EachHowMany = 5*fps;    % How many frames will have each matfile. It depends on the occupied RAM memory.
+EachHowMany = fps*5;    % How many frames will have each matfile. Number = fps * #seconds (5 in this case).
 
 %% Prepare folders and LogFile
 
