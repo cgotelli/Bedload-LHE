@@ -1,5 +1,5 @@
 %% Trimming images
-function [data_filtered] = TrimImage(data, x_0, x_end, y_0, y_end, n, name, savepath)
+function TrimImage(data, x_0, x_end, y_0, y_end, n, name, savepath)
 % 
 data_filtered = zeros(y_end-y_0+1, x_end-x_0+1, n);
 %x = false(xdim,ydim,n);

@@ -6,7 +6,7 @@
 
 function Filtering(filesPath, filenames, FileType, ProcessingMode, FilteredPath, ...
     xdim, ydim, x_0, x_end, y_0, y_end, ...
-    GaussFilterSigma, FilterDiskSize, DilatationDiskSize)
+    GaussFilterSigma, FilterDiskSize, DilatationDiskSize, cropping)
 
 if strcmp(FileType, 'matfile') % For matfiles
     
@@ -27,8 +27,12 @@ if strcmp(FileType, 'matfile') % For matfiles
                 FilterDiskSize, DilatationDiskSize);
             
             % Cropping images
-            TrimImage(data_filtered, x_0, x_end, y_0, y_end, dim, ...
+            if strcmp(cropping, 'yes')
+                TrimImage(data_filtered, x_0, x_end, y_0, y_end, dim, ...
                 filenames{j}, FilteredPath); %trim each picture to remove the borders
+            else
+                ExportFiltered(filenames{j}, FilteredPath, data_filtered);
+            end
             
         end
         
@@ -49,8 +53,14 @@ if strcmp(FileType, 'matfile') % For matfiles
                 FilterDiskSize, DilatationDiskSize);
             
             % Cropping images
-            TrimImage(data_filtered, x_0, x_end, y_0, y_end, dim, ...
+            if strcmp(cropping, 'yes')
+                TrimImage(data_filtered, x_0, x_end, y_0, y_end, dim, ...
                 filenames(j).name, FilteredPath); %trim each picture to remove the borders
+            else
+                
+                ExportFiltered(filenames{j}, FilteredPath, data_filtered);
+            
+            end                
             
         end
         
@@ -81,15 +91,19 @@ elseif strcmp(FileType, 'video') % Only for one file
                 FilterDiskSize, DilatationDiskSize);
             
             % Cropping images
-            TrimImage(data_filtered, x_0, x_end, y_0, y_end, dim, ...
-                filenames{j}, FilteredPath);    %trim each picture to remove the borders
-            
+            if strcmp(cropping, 'yes')
+                TrimImage(data_filtered, x_0, x_end, y_0, y_end, dim, ...
+                filenames{j}, FilteredPath); %trim each picture to remove the borders
+            else
+                ExportFiltered(filenames{j}, FilteredPath, data_filtered);
+            end
+
         end
         
         
     elseif strcmp(ProcessingMode, 'all') % For all videos in the folder
         
-        parfor j = 1:length(filenames)
+        for j = 1:length(filenames)
             
             name    = fullfile(filesPath, filenames(j).name);
             disp(filenames(j).name)
@@ -110,8 +124,14 @@ elseif strcmp(FileType, 'video') % Only for one file
                 FilterDiskSize, DilatationDiskSize);
             
             % Cropping images
-            TrimImage(data_filtered, x_0, x_end, y_0, y_end, dim, ...
-                filenames(j).name, FilteredPath);    %trim each picture to remove the borders
+            if strcmp(cropping, 'yes')
+                TrimImage(data_filtered, x_0, x_end, y_0, y_end, dim, ...
+                filenames(j).name, FilteredPath); %trim each picture to remove the borders
+            else
+                
+                ExportFiltered(filenames(j).name, FilteredPath, data_filtered);
+                
+            end
         end
         
     end

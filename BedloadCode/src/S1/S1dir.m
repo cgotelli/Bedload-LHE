@@ -44,7 +44,7 @@ elseif strcmp(FileType, 'video') % If we want to process videos
         
     elseif strcmp(ProcessingMode, 'all') % For every matfile inside the 'RAW_matfile' folder
         
-        filesPath = uigetdir('D:\GitHub\Bedload-LHE\data', 'Path where matfiles are stored');
+        filesPath = uigetdir('D:\GitHub\Bedload-LHE\data', 'Path where videos are stored');
         filenames = dir(fullfile(filesPath, '*.avi')); % Gets all the files with *.avi extension inside the folder, and stores the information in a struct-type variable
         
     end
