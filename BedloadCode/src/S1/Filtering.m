@@ -77,7 +77,7 @@ elseif strcmp(FileType, 'video') % Only for one file
             fprintf("Filtering\n") % Prints in console <<Filtering>> to let you know when the process started
             
             % Applying filters to all images
-            data_filtered=FiltersFunction_v1(data, xdim,ydim, dim, GaussFilterSigma, ...
+            data_filtered=FiltersFunction(data, xdim,ydim, dim, GaussFilterSigma, ...
                 FilterDiskSize, DilatationDiskSize);
             
             % Cropping images
@@ -106,7 +106,7 @@ elseif strcmp(FileType, 'video') % Only for one file
             fprintf("Filtering\n") % Prints in console <<Filtering>> to let you know when the process started
             
             % Applying filters to all images
-            data_filtered   = FiltersFunction_v1(data, xdim,ydim, dim, GaussFilterSigma, ...
+            data_filtered   = FiltersFunction(data, xdim,ydim, dim, GaussFilterSigma, ...
                 FilterDiskSize, DilatationDiskSize);
             
             % Cropping images
