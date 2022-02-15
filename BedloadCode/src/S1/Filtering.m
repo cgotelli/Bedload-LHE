@@ -12,7 +12,7 @@ if strcmp(FileType, 'matfile') % For matfiles
     
     if strcmp(ProcessingMode, 'select') % For selected matfiles
         
-        for j = 1:length(filenames)
+        parfor j = 1:length(filenames)
             
             name    = fullfile(filesPath, filenames{j});
             disp(filenames{j})
@@ -70,7 +70,7 @@ elseif strcmp(FileType, 'video') % Only for one file
     
     if strcmp(ProcessingMode, 'select') % For selected videos
         
-        for j = 1:length(filenames)
+        parfor j = 1:length(filenames)
             
             name    = fullfile(filesPath, filenames{j});
             disp(filenames{j})
@@ -103,7 +103,7 @@ elseif strcmp(FileType, 'video') % Only for one file
         
     elseif strcmp(ProcessingMode, 'all') % For all videos in the folder
         
-        for j = 1:length(filenames)
+        parfor j = 1:length(filenames)
             
             name    = fullfile(filesPath, filenames(j).name);
             disp(filenames(j).name)
