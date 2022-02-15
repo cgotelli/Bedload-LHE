@@ -24,12 +24,12 @@ ProcessingMode = 'all';
 % These parameters must be estimated during the image calibration process previous to the sediment counter
 % calibration.
 
-n       = 4;                    % number of cores to use
+n       = 8;                    % number of cores to use
 GaussFilterSigma    = 0.5;      % Sigma value for Gauss's Filter
 FilterDiskSize      = 8;        % Disk size bothat filter
 DilatationDiskSize  = 0;        % Disk size for dilation function
-xdim    = 1280;                  % Image's width
-ydim    = 720;                  % Image's height
+xdim    = 640;                  % Image's width
+ydim    = 480;                  % Image's height
 crop    = 'no';                 % Decide whter will trim the picture or not. 'yes' or 'no'.
 x_0     = 1;                    % bottom-left x-coordinate for cropping the image
 x_end   = 640;                  % top-right x-coordinate for cropping the image

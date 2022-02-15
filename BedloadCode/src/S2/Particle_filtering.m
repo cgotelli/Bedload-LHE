@@ -30,11 +30,7 @@ filtered_particles = filtered_particles(filtered_particles(:,2) > minSize,:);
 % tic
 if isempty(filtered_particles)
     
-    for h = 1:num_frames
-        
-        filtered_particles = [filtered_particles; h, 0, 0, 0, 0, 0];
-        
-    end
+    filtered_particles = [linspace(1,num_frames,num_frames)'; zeros(1,num_frames,num_frames)'; zeros(1,num_frames,num_frames)'; zeros(1,num_frames,num_frames)'];
     
 else
     
@@ -42,7 +38,7 @@ else
         
         if isempty(filtered_particles(filtered_particles(:, 1) == h))
             
-            filtered_particles = [filtered_particles; h, 0, 0, 0, 0, 0];
+            filtered_particles = [filtered_particles; h, 0, 0, 0];
             
         end
         
@@ -50,7 +46,7 @@ else
     
 end
 
-% To chech hay many filtered particles are left per image. In average it should be around 11 (based on
+% To check how many filtered particles are left per image. In average it should be around 11 (based on
 % Zimmermann). To check this, use breakpoints in any of the following 4 lines.
 a   = unique(filtered_particles(:, 1));
 out = [a, histc(filtered_particles(:, 1), a)];
@@ -78,7 +74,7 @@ for h = 1:num_frames % Loop over all frames
         
         if tam(2) == 1 % If there is only one particle inside the circle (the particle itself), it saves the data.
             
-            final_particles = [final_particles; filtered_particles(k+aux, 1:6)];  %19/10/2021 modif to return also minor and major axis lengths
+            final_particles = [final_particles; filtered_particles(k+aux, 1:4)];  %19/10/2021 modif to return also minor and major axis lengths
             aux2 = aux2 + 1;
         end
         

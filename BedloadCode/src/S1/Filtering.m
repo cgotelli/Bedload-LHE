@@ -38,7 +38,7 @@ if strcmp(FileType, 'matfile') % For matfiles
         
     elseif strcmp(ProcessingMode, 'all') % For all matfiles in the folder
         
-        for j = 1:length(filenames)
+        parfor j = 1:length(filenames)
             
             name    = fullfile(filesPath, filenames(j).name);
             disp(filenames(j).name)
@@ -110,13 +110,13 @@ elseif strcmp(FileType, 'video') % Only for one file
             vid     = VideoReader(name);                  %open the video
             dim     = vid.NumFrames;
             data    = zeros(ydim,xdim,dim,'uint8');
-            
+           
             for i=1:dim
                 
                 data(:,:,i) = readFrame(vid);               %read frame by frame
                 
             end
-            
+                       
             fprintf("Filtering\n") % Prints in console <<Filtering>> to let you know when the process started
             
             % Applying filters to all images
