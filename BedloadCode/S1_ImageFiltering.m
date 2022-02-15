@@ -24,7 +24,7 @@ ProcessingMode = 'all';
 % These parameters must be estimated during the image calibration process previous to the sediment counter
 % calibration.
 
-n       = 8;                    % number of cores to use
+n       = 4;                    % number of cores to use
 GaussFilterSigma    = 0.5;      % Sigma value for Gauss's Filter
 FilterDiskSize      = 8;        % Disk size bothat filter
 DilatationDiskSize  = 0;        % Disk size for dilation function
@@ -41,9 +41,9 @@ y_end   = 480;                  % top-right y-coordinate for cropping the image
 [filenames, filesPath, FilteredPath] = S1dir(n, FileType, ProcessingMode);
 
 %% Filtering execution
-
+tic
 Filtering(filesPath, filenames, FileType, ProcessingMode, FilteredPath, ...
     xdim, ydim, x_0, x_end, y_0, y_end, ...
     GaussFilterSigma, FilterDiskSize, DilatationDiskSize, crop)
-
+toc
 fprintf("c'est fini\n")

@@ -12,7 +12,7 @@ if strcmp(FileType, 'matfile') % For matfiles
     
     if strcmp(ProcessingMode, 'select') % For selected matfiles
         
-        parfor j = 1:length(filenames)
+        for j = 1:length(filenames)
             
             name    = fullfile(filesPath, filenames{j});
             disp(filenames{j})
@@ -38,7 +38,7 @@ if strcmp(FileType, 'matfile') % For matfiles
         
     elseif strcmp(ProcessingMode, 'all') % For all matfiles in the folder
         
-        parfor j = 1:length(filenames)
+        for j = 1:length(filenames)
             
             name    = fullfile(filesPath, filenames(j).name);
             disp(filenames(j).name)
@@ -58,7 +58,7 @@ if strcmp(FileType, 'matfile') % For matfiles
                 filenames(j).name, FilteredPath); %trim each picture to remove the borders
             else
                 
-                ExportFiltered(filenames{j}, FilteredPath, data_filtered);
+                ExportFiltered(filenames(j).name, FilteredPath, data_filtered);
             
             end                
             
@@ -70,7 +70,7 @@ elseif strcmp(FileType, 'video') % Only for one file
     
     if strcmp(ProcessingMode, 'select') % For selected videos
         
-        parfor j = 1:length(filenames)
+        for j = 1:length(filenames)
             
             name    = fullfile(filesPath, filenames{j});
             disp(filenames{j})

@@ -29,8 +29,8 @@ lim_width   = 0.05;         % fraction of the image to exclude in the x axis for
 lim_height  = 0.05;         % fraction of the image to exclude in the y axis for each border.
 n           = 4;            % number of cores to use
 skip        = 1;            % number of matfiles to skip for velocity computation. One each "skip" files.
-imheight    = 480;          % image height
-imwidth     = 640;          % image width
+imwidth     = 1280;          % image width
+imheight    = 720;          % image height
 maxparticles= 150;          % Maximum number of particles to process by frame (~15)
 
 % Determines files' directories & creates folder to export filtered images
