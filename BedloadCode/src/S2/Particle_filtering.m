@@ -1,11 +1,11 @@
-% Particle filtering 
+% Particle filtering
 % Filters particles for later calculation of mean velocity following the same algorithm
-% used by Zimmermann. 
+% used by Zimmermann.
 % - It receives the array with the detected particles on each frame. The received array has
 % the following structure: [frame number, area, centroid's x coordinate, centroid's y coordinate, Major Axis
 % Length, Minor Axis Length]
 % - It also receives the parameters for the filtering process. These parameters must be set by a
-% previous calibration process. 
+% previous calibration process.
 % - It returns a table with all filtered particles including the following
 % parameters: [image index; area; x; y; MajorAxis; Minor Axis]
 
@@ -28,17 +28,18 @@ filtered_particles = filtered_particles(filtered_particles(:,2) < maxSize,:);
 filtered_particles = filtered_particles(filtered_particles(:,2) > minSize,:);
 
 % tic
-if isempty(filtered_particles)
+% Conditions to fill the matrix based on the number of particles detected on each frame.
+if isempty(filtered_particles) % If no particle is detected in any image inside the array: creates an array of zeros and the index of the image inside the array.
     
-    filtered_particles = [linspace(1,num_frames,num_frames)'; zeros(1,num_frames,num_frames)'; zeros(1,num_frames,num_frames)'; zeros(1,num_frames,num_frames)'];
+    filtered_particles = [linspace(1,num_frames,num_frames)', zeros(1,num_frames)', zeros(1,num_frames)', zeros(1,num_frames)'];
     
-else
+else % If its not empty, checks on each frame if it has particles or not. If it doesn't detect any particle, fills with a row of zeros at the end of the matrix.
     
     for h = 1:num_frames
         
         if isempty(filtered_particles(filtered_particles(:, 1) == h))
-            
-            filtered_particles = [filtered_particles; h, 0, 0, 0];
+            filtered_particles = [filtered_particles(1:h-1, :); h, 0, 0, 0; filtered_particles(h:end, :)];
+            %             filtered_particles = [filtered_particles; h, 0, 0, 0];
             
         end
         
@@ -82,7 +83,7 @@ for h = 1:num_frames % Loop over all frames
             
             break
             
-        end 
+        end
         
     end
     

@@ -6,7 +6,7 @@
 
 function Filtering(filesPath, filenames, FileType, ProcessingMode, FilteredPath, ...
     xdim, ydim, x_0, x_end, y_0, y_end, ...
-    GaussFilterSigma, FilterDiskSize, DilatationDiskSize, cropping)
+    GaussFilterSigma, FilterDiskSize, DilatationDiskSize, cropping, minSize)
 
 if strcmp(FileType, 'matfile') % For matfiles
     
@@ -24,7 +24,7 @@ if strcmp(FileType, 'matfile') % For matfiles
             
             % Applying filters to all images
             data_filtered   = FiltersFunction(images, xdim, ydim, dim, GaussFilterSigma, ...
-                FilterDiskSize, DilatationDiskSize);
+                FilterDiskSize, DilatationDiskSize, minSize);
             
             % Cropping images
             if strcmp(cropping, 'yes')
@@ -50,7 +50,7 @@ if strcmp(FileType, 'matfile') % For matfiles
             
             % Applying filters to all images
             data_filtered   = FiltersFunction(images, xdim, ydim, dim, GaussFilterSigma, ...
-                FilterDiskSize, DilatationDiskSize);
+                FilterDiskSize, DilatationDiskSize, minSize);
             
             % Cropping images
             if strcmp(cropping, 'yes')
@@ -88,7 +88,7 @@ elseif strcmp(FileType, 'video') % Only for one file
             
             % Applying filters to all images
             data_filtered=FiltersFunction(data, xdim,ydim, dim, GaussFilterSigma, ...
-                FilterDiskSize, DilatationDiskSize);
+                FilterDiskSize, DilatationDiskSize, minSize);
             
             % Cropping images
             if strcmp(cropping, 'yes')
@@ -121,7 +121,7 @@ elseif strcmp(FileType, 'video') % Only for one file
             
             % Applying filters to all images
             data_filtered   = FiltersFunction(data, xdim,ydim, dim, GaussFilterSigma, ...
-                FilterDiskSize, DilatationDiskSize);
+                FilterDiskSize, DilatationDiskSize, minSize);
             
             % Cropping images
             if strcmp(cropping, 'yes')

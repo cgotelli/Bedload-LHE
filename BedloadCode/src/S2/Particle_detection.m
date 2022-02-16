@@ -6,14 +6,14 @@
 % - Returns an array with all detected particles including the following parameters:
 % [index of the image; area; Centroid's x-coordinate; Centroid's y-coordinate; MajorAxis; Minor Axis]
 
-function [particles] = Particle_detection(img_array, low_boundary, SavePath, filename)
+function [particles] = Particle_detection(img_array, SavePath, filename)
 
 % If it is a single image
 if size(img_array, 3) == 1
         
     img = img_array;                            % Assigns the input array
-    img = bwareaopen(img, low_boundary);        % Removes small objects from image smaller than "low_boundary" number of pixels.
-    img = imclearborder(img, 8);                % Supress points touching the borders of the image
+    %img = bwareaopen(img, low_boundary);        % Removes small objects from image smaller than "low_boundary" number of pixels.
+    %img = imclearborder(img, 8);                % Supress points touching the borders of the image
     s = regionprops(img, 'Area', 'Centroid', 'MajorAxisLength', 'MinorAxisLength'); % Extracts properties from all particles
     areas = cat(1, s.Area);                     % Stores areas
     centroids = cat(1, s.Centroid);             % Stores centroids
@@ -31,7 +31,7 @@ else
     for i = 1:size(img_array, 3)                    % Loop over images
         
         img = img_array(:, :, i);                   % Loads image
-        img = bwareaopen(~img, low_boundary);       % Delete smaller particles, smaller than given boundary
+        %img = bwareaopen(~img, low_boundary);       % Delete smaller particles, smaller than given boundary
         %img = imclearborder(img, 8);                % Deletes particles touching border
         s   = regionprops(img, 'Area', 'Centroid'); % Dets properties for all particles
         areas       = cat(1, s.Area);               % Gets areas

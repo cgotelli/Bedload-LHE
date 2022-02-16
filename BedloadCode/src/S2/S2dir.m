@@ -7,6 +7,19 @@
 
 function [filesPath, filenames, SavePath] = S2dir(ProcessingMode, n)
 
+% Parallel computing setup (Not using for now)
+
+% Before starts, it checks how many cores are in the pool. If the number is
+% zero, it creates a pool with n cores.
+
+p = gcp('nocreate');
+
+if isempty(p) && n~=1
+    
+    p = parpool(n);
+    
+end
+
 if strcmp(ProcessingMode, 'select')
     
     [filenames, filesPath] = uigetfile('D:\GitHub\Bedload-LHE\data\', ...
@@ -34,20 +47,6 @@ SavePath = fullfile(filesPath, '..', 'Output');
 if ~exist(SavePath, 'dir')
     
     mkdir(SavePath)
-    
-end
-
-
-%% Parallel computing setup (Not using for now)
-
-% Before starts, it checks how many cores are in the pool. If the number is
-% zero, it creates a pool with n cores.
-
-p = gcp('nocreate');
-
-if isempty(p) && n~=1
-    
-    p = parpool(n);
     
 end
 

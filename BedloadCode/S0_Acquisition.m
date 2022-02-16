@@ -22,7 +22,7 @@ imaqreset   % Clear all variables related to the videoinput object
 % We define the different parameters used by the functions.
 
 % What camera are we using?
-flume   = "laptop";     % Options: LESO, office, laptop, Halle. Edit InitiateVideo.m to add options.
+camera   = "laptop";     % Options: LESO, office, laptop, Halle. Edit InitiateVideo.m to add options.
 
 % Parallel process
 n   = 4;                % number of cores to use
@@ -30,7 +30,7 @@ n   = 4;                % number of cores to use
 % Image acquisition
 fps         = 15;       % number of FPS
 saveFrames  = 'n';      % Want to save the original frames? (y or n)
-extension   = 'bmp';    % Extension format for images to export: 'tiff', 'jpeg', 'bmp', 'png'
+extension   = 'bmp';    % Extension format for exporting images: 'tiff', 'jpeg', 'bmp', 'png'
 EachHowMany = fps*5;    % How many frames will have each matfile. Number = fps * #seconds (5 in this case).
 
 %% Prepare folders and LogFile
@@ -39,7 +39,7 @@ EachHowMany = fps*5;    % How many frames will have each matfile. Number = fps *
 
 %% Videoinput object setup
 
-[vid, src] = InitiateVideo(flume, fps, fid, matfilesPath, saveFrames, extension, framesPath, EachHowMany);
+[vid, src] = InitiateVideo(camera, fps, fid, matfilesPath, saveFrames, extension, framesPath, EachHowMany);
 
 %% Acquisition process
 

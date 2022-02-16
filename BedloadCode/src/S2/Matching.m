@@ -3,7 +3,7 @@
 % frames, mean particle velocity by frame, total amount of pixels corresponding to particles, and the sediment
 % discharge computation.
 
-function Matching(filesPath, filenames, SavePath, ProcessingMode, skip, minSize,...
+function Matching(filesPath, filenames, SavePath, ProcessingMode, skip, ...
     distMinIsol, areamin, areamax, lim_width, lim_height, distMinVel, distMaxVel, difs_th, x_dev, ...
     fps, imheight, imwidth, maxparticles)
 
@@ -19,7 +19,7 @@ if strcmp(ProcessingMode, 'select') % For selected matfiles
         
         disp(strcat('Processing file', " -------> ", filenames{j}))         % Prints file name
         
-        particles_data = Particle_detection(images, minSize, SavePath, filenames{j}); % Detects all particles
+        particles_data = Particle_detection(images, SavePath, filenames{j}); % Detects all particles
         
         disp(strcat('We passed the particle detection', " -------> ", filenames{j}))
         
@@ -39,7 +39,7 @@ if strcmp(ProcessingMode, 'select') % For selected matfiles
     
 elseif strcmp(ProcessingMode, 'all') % For all matfiles in the folder
     
-    parfor j = 1:length(filenames)
+    for j = 1:length(filenames)
 
         name    = fullfile(filesPath, filenames(j).name);
         images  = load(name);
@@ -51,7 +51,7 @@ elseif strcmp(ProcessingMode, 'all') % For all matfiles in the folder
             
             disp(strcat(num2str(j), " Starting complete process for: ", " -----> ", filenames(j).name))
 %             tic
-            particles_data = Particle_detection(images, minSize, SavePath, filenames(j).name); % Detects all particles
+            particles_data = Particle_detection(images, SavePath, filenames(j).name); % Detects all particles
 %             toc
             disp(strcat(num2str(j), " We passed the particle detection -------> " , filenames(j).name))
 %             tic
