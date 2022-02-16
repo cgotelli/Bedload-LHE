@@ -10,7 +10,7 @@
 
 clear all;
 close all;
-clc
+% clc
 
 %% Computation setup
 
