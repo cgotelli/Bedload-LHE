@@ -9,41 +9,28 @@
 
 close all;  % Close all windows
 clear all;  % Clear the workspace
-clc         % Clear console
+% clc         % Clear console
 
 %% Filtering setup
 % We define the different parameters used by the functions.
-
-% Choose in what format are the RAW images: "matfile" or "video"
-FileType = 'video';
+FileType = 'matfile';   % Choose in what format are the RAW images: "matfile" or "video"
+n   = 4;                % number of cores to use
 
 % Choose which elements to process: "select" for specific ones, or "all" for everything inside a folder.
 ProcessingMode = 'all'; 
+% What camera are we using?
+camera  = "Halle"; % Options: LESO, office, laptop, Halle.
+% Loading the parameters to use for filtering. The values must be determined during calibration.
+[GaussFilterSigma, FilterDiskSize, DilatationDiskSize, xdim, ydim, crop, x_0, x_end,...
+    y_0, y_end, minSize] = paramsFiltering(camera);
 
-% User defined parameters.
-% These parameters must be estimated during the image calibration process previous to the sediment counter
-% calibration.
-
-n       = 8;                    % number of cores to use
-GaussFilterSigma    = 0.5;      % Sigma value for Gauss's Filter
-FilterDiskSize      = 8;        % Disk size bothat filter
-DilatationDiskSize  = 0;        % Disk size for dilation function
-xdim    = 640;                  % Image's width
-ydim    = 480;                  % Image's height
-crop    = 'no';                 % Decide whter will trim the picture or not. 'yes' or 'no'.
-x_0     = 1;                    % bottom-left x-coordinate for cropping the image
-x_end   = 640;                  % top-right x-coordinate for cropping the image
-y_0     = 1;                    % bottom-left y-coordinate for cropping the image
-y_end   = 480;                  % top-right y-coordinate for cropping the image
-
-                                        
 % Determines files' directories & creates folder to export filtered images
 [filenames, filesPath, FilteredPath] = S1dir(n, FileType, ProcessingMode);
 
 %% Filtering execution
-
+tic
 Filtering(filesPath, filenames, FileType, ProcessingMode, FilteredPath, ...
     xdim, ydim, x_0, x_end, y_0, y_end, ...
-    GaussFilterSigma, FilterDiskSize, DilatationDiskSize, crop)
-
+    GaussFilterSigma, FilterDiskSize, DilatationDiskSize, crop, minSize)
+toc
 fprintf("c'est fini\n")

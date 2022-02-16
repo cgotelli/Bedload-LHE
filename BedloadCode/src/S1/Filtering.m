@@ -6,7 +6,7 @@
 
 function Filtering(filesPath, filenames, FileType, ProcessingMode, FilteredPath, ...
     xdim, ydim, x_0, x_end, y_0, y_end, ...
-    GaussFilterSigma, FilterDiskSize, DilatationDiskSize, cropping)
+    GaussFilterSigma, FilterDiskSize, DilatationDiskSize, cropping, minSize)
 
 if strcmp(FileType, 'matfile') % For matfiles
     
@@ -24,7 +24,7 @@ if strcmp(FileType, 'matfile') % For matfiles
             
             % Applying filters to all images
             data_filtered   = FiltersFunction(images, xdim, ydim, dim, GaussFilterSigma, ...
-                FilterDiskSize, DilatationDiskSize);
+                FilterDiskSize, DilatationDiskSize, minSize);
             
             % Cropping images
             if strcmp(cropping, 'yes')
@@ -50,7 +50,7 @@ if strcmp(FileType, 'matfile') % For matfiles
             
             % Applying filters to all images
             data_filtered   = FiltersFunction(images, xdim, ydim, dim, GaussFilterSigma, ...
-                FilterDiskSize, DilatationDiskSize);
+                FilterDiskSize, DilatationDiskSize, minSize);
             
             % Cropping images
             if strcmp(cropping, 'yes')
@@ -58,7 +58,7 @@ if strcmp(FileType, 'matfile') % For matfiles
                 filenames(j).name, FilteredPath); %trim each picture to remove the borders
             else
                 
-                ExportFiltered(filenames{j}, FilteredPath, data_filtered);
+                ExportFiltered(filenames(j).name, FilteredPath, data_filtered);
             
             end                
             
@@ -88,7 +88,7 @@ elseif strcmp(FileType, 'video') % Only for one file
             
             % Applying filters to all images
             data_filtered=FiltersFunction(data, xdim,ydim, dim, GaussFilterSigma, ...
-                FilterDiskSize, DilatationDiskSize);
+                FilterDiskSize, DilatationDiskSize, minSize);
             
             % Cropping images
             if strcmp(cropping, 'yes')
@@ -103,25 +103,25 @@ elseif strcmp(FileType, 'video') % Only for one file
         
     elseif strcmp(ProcessingMode, 'all') % For all videos in the folder
         
-        for j = 1:length(filenames)
+        parfor j = 1:length(filenames)
             
             name    = fullfile(filesPath, filenames(j).name);
             disp(filenames(j).name)
             vid     = VideoReader(name);                  %open the video
             dim     = vid.NumFrames;
             data    = zeros(ydim,xdim,dim,'uint8');
-            
+           
             for i=1:dim
                 
                 data(:,:,i) = readFrame(vid);               %read frame by frame
                 
             end
-            
+                       
             fprintf("Filtering\n") % Prints in console <<Filtering>> to let you know when the process started
             
             % Applying filters to all images
             data_filtered   = FiltersFunction(data, xdim,ydim, dim, GaussFilterSigma, ...
-                FilterDiskSize, DilatationDiskSize);
+                FilterDiskSize, DilatationDiskSize, minSize);
             
             % Cropping images
             if strcmp(cropping, 'yes')

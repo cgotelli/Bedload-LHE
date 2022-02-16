@@ -15,9 +15,9 @@
 % parallel to accelerate the process and be able to do it in real time. We can modify the script to filter the
 % images as well, but it requires either small images or a mega fast computer.
 
-function [vid, src] = InitiateVideo(flume, fps, fid, matfilesPath, saveFrames, extension, framesPath, EachHowMany)
+function [vid, src] = InitiateVideo(camera, fps, fid, matfilesPath, saveFrames, extension, framesPath, EachHowMany)
 
-if flume == "LESO" % Camera of the prototype
+if camera == "LESO" % Camera of the prototype
 
     % Camera's resolution
     %     xres        = 640;  % Image's width
@@ -39,7 +39,7 @@ if flume == "LESO" % Camera of the prototype
 %     src.Brightness          = 16;
 
 
-elseif flume == "office"    % Logitech Webcam C210 (winvideo-1)
+elseif camera == "office"    % Logitech Webcam C210 (winvideo-1)
 
     % Camera's resolution
     xres        = 640;  % Image's width
@@ -60,7 +60,7 @@ elseif flume == "office"    % Logitech Webcam C210 (winvideo-1)
     src = getselectedsource(vid); % Return currently selected video source object
     src.Brightness = 128;
 
-elseif flume == "laptop" % Clemente's ASUS personal laptop
+elseif camera == "laptop" % Clemente's ASUS personal laptop
 
     %     % Camera's resolution
     %     xres        = 640;  % Image's width
@@ -85,10 +85,7 @@ elseif flume == "laptop" % Clemente's ASUS personal laptop
     src.BacklightCompensation = 'off';
     src.WhiteBalanceMode = 'auto';
 
-
-
-
-elseif flume == "Halle" % Main channel parameters. To be calibrated.
+elseif camera == "Halle" % Main channel parameters. To be calibrated.
 
     %     % Camera's resolution
     %     xres        = 640;  % Image's width

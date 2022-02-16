@@ -3,6 +3,17 @@
 
 function [savePath, mainFolder, matfilesPath, framesPath, fid] = S0dir(n, saveFrames)
 
+% Before starts, it checks how many cores are in the pool. If the number is zero, it creates a 
+% pool with n cores.
+
+p = gcp('nocreate');
+
+if isempty(p) && n~=1
+    
+    p = parpool(n);
+    
+end
+
 % Saves the current date and time
 c = clock;
 
@@ -30,18 +41,5 @@ end
 % Creates and open logfile inside the main RAW data folder.
 fid = fopen(fullfile(mainFolder, strcat('LogFile_', sprintf('%d',c(1)), sprintf('%02.0f',c(2)), ...
     sprintf('%02.0f',c(3)), sprintf('%02.0f',c(4)), sprintf('%02.0f',c(5)), '.txt')), 'a');
-
-
-
-% Before starts, it checks how many cores are in the pool. If the number is zero, it creates a 
-% pool with n cores.
-
-p = gcp('nocreate');
-
-if isempty(p) && n~=1
-    
-    p = parpool(n);
-    
-end
 
 end

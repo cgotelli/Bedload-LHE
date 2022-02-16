@@ -83,7 +83,7 @@ for i = 1:num_frames-1                  % For loop over the first n-1 frames.
     % 
     if isnan(mv)
     
-        mv = 0;
+        mv = NaN;
         
     end
     

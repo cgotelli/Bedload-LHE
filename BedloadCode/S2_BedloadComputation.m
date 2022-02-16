@@ -10,15 +10,14 @@
 
 clear all;
 close all;
-clc
+% clc
 
 %% Computation setup
 
 ProcessingMode = 'all';   % "select" or "all" folders
 
-minSize     = 10;           % Minimum size to consider a cluster as a particle (in px)
-fps         = 60;           % Frame rate for acquisition in the flume
-distMaxVel  = 40;           % Max distance traveled by a particle between images. To avoid impossible pairs.
+fps         = 30;           % Frame rate for acquisition in the flume
+distMaxVel  = 120;           % Max distance traveled by a particle between images. To avoid impossible pairs.
 distMinVel  = 10;           % Min distance traveled by a particle between images. To avoid impossible pairs.
 distMinIsol = 18;           % Separation to define isolated particles. Necessary for getting a mean velocity.
 areamin     = 0.5;          % Lower threshold area to consider a particle in the counting process.
@@ -29,9 +28,9 @@ lim_width   = 0.05;         % fraction of the image to exclude in the x axis for
 lim_height  = 0.05;         % fraction of the image to exclude in the y axis for each border.
 n           = 4;            % number of cores to use
 skip        = 1;            % number of matfiles to skip for velocity computation. One each "skip" files.
-imheight    = 480;          % image height
-imwidth     = 640;          % image width
-maxparticles= 150;          % Maximum number of particles to process by frame (~15)
+imwidth     = 2700;         % image width
+imheight    = 500;          % image height
+maxparticles= 15;           % Maximum number of particles to process by frame (~15)
 
 % Determines files' directories & creates folder to export filtered images
 [filesPath, filenames, SavePath] = S2dir(ProcessingMode, n);
@@ -40,10 +39,10 @@ maxparticles= 150;          % Maximum number of particles to process by frame (~
 
 tic
 
-Matching(filesPath, filenames, SavePath, ProcessingMode, skip, minSize, distMinIsol, ...
+Matching(filesPath, filenames, SavePath, ProcessingMode, skip, distMinIsol, ...
     areamin, areamax, lim_width, lim_height, distMinVel, distMaxVel, difs_th, x_dev, fps,...
     imheight, imwidth, maxparticles);
 
-Discharge_computation(SavePath, fps, imheight, imwidth);
+%Discharge_computation(SavePath, fps, imheight, imwidth);
 
 toc
