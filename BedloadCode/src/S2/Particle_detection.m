@@ -17,7 +17,8 @@ if size(img_array, 3) == 1
     s = regionprops(img, 'Area', 'Centroid', 'MajorAxisLength', 'MinorAxisLength'); % Extracts properties from all particles
     areas = cat(1, s.Area);                     % Stores areas
     centroids = cat(1, s.Centroid);             % Stores centroids
-    %MajorAxisLength = cat(1, s.MajorAxisLength);% Stores major axis of particles
+%     [areas, centroids] = Particles_info(img);
+%     MajorAxisLength = cat(1, s.MajorAxisLength);% Stores major axis of particles
     %MinorAxisLength = cat(1, s.MinorAxisLength);% Stores minor axis of particles
     
     % Stores all this information into one matrix
@@ -36,6 +37,8 @@ else
         s   = regionprops(img, 'Area', 'Centroid'); % Dets properties for all particles
         areas       = cat(1, s.Area);               % Gets areas
         centroids   = cat(1, s.Centroid);           % Get centroids
+%         [areas, centroids] = Particles_info(img);
+
         %MajorAxisLength = cat(1, s.MajorAxisLength);% Get major axis lenght
         %MinorAxisLength = cat(1, s.MinorAxisLength);% Get minor axis lenght
         
