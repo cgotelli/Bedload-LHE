@@ -33,6 +33,7 @@ for i = 1:num_frames-1                  % For loop over the first n-1 frames.
         for k = 1:size(iks2)
             
             difs = (log2(areas1(j))-log2(areas2(k)))/log2(areas1(j)); % Difference in areas 
+            
             % If the absolute difference between areas is lower than the threshold, and the position in y for
             % the particle in i+1 lies within the given range for the particle in frame i, and the position in
             % x for the particle in fram i+1 lies within the requiered range for the particle in frame i; then

@@ -11,15 +11,15 @@ function [particles] = Particle_detection(img_array, SavePath, filename)
 % If it is a single image
 if size(img_array, 3) == 1
         
-    img = img_array;                            % Assigns the input array
-    %img = bwareaopen(img, low_boundary);        % Removes small objects from image smaller than "low_boundary" number of pixels.
-    %img = imclearborder(img, 8);                % Supress points touching the borders of the image
-%     s = regionprops(img, 'Area', 'Centroid', 'MajorAxisLength', 'MinorAxisLength'); % Extracts properties from all particles
-%     areas = cat(1, s.Area);                     % Stores areas
-%     centroids = cat(1, s.Centroid);             % Stores centroids
+    img = img_array;                                    % Assigns the input array
+%     img = bwareaopen(img, low_boundary);              % Removes small objects from image smaller than "low_boundary" number of pixels.
+%     img = imclearborder(img, 8);                      % Supress points touching the borders of the image
+%     s = regionprops(img, 'Area', 'Centroid');         % Extracts properties from all particles
+%     areas = cat(1, s.Area);                           % Stores areas
+%     centroids = cat(1, s.Centroid);                   % Stores centroids
     [areas, centroids] = Particles_info(img);
-%     MajorAxisLength = cat(1, s.MajorAxisLength);% Stores major axis of particles
-    %MinorAxisLength = cat(1, s.MinorAxisLength);% Stores minor axis of particles
+%     MajorAxisLength = cat(1, s.MajorAxisLength);      % Stores major axis of particles
+%     MinorAxisLength = cat(1, s.MinorAxisLength);      % Stores minor axis of particles
     
     % Stores all this information into one matrix
     particles = [areas(:) , centroids(:, :)]; 
@@ -27,22 +27,23 @@ if size(img_array, 3) == 1
 else
     
     % If it is more than one image (an array of images)
-    particles = [];                                 % Empty array for particles
+    particles = [];                                     % Empty array for particles
     
-    for i = 1:size(img_array, 3)                    % Loop over images
-        
-        img = img_array(:, :, i);                   % Loads image
-        %img = bwareaopen(~img, low_boundary);       % Delete smaller particles, smaller than given boundary
-        %img = imclearborder(img, 8);                % Deletes particles touching border
-        s   = regionprops(img, 'Area', 'Centroid'); % Dets properties for all particles
-%         areas       = cat(1, s.Area);               % Gets areas
-%         centroids   = cat(1, s.Centroid);           % Get centroids
+    for i = 1:size(img_array, 3)                        % Loop over images
+
+        img = img_array(:, :, i);                       % Loads image
+%         img = bwareaopen(~img, low_boundary);         % Delete smaller particles, smaller than given boundary
+%         img = imclearborder(img, 8);                  % Deletes particles touching border
+%         s   = regionprops(img, 'Area', 'Centroid');   % Dets properties for all particles
+%         areas       = cat(1, s.Area);                 % Gets areas
+%         centroids   = cat(1, s.Centroid);             % Get centroids
         [areas, centroids] = Particles_info(img);
 
-        %MajorAxisLength = cat(1, s.MajorAxisLength);% Get major axis lenght
-        %MinorAxisLength = cat(1, s.MinorAxisLength);% Get minor axis lenght
+%         MajorAxisLength = cat(1, s.MajorAxisLength);  % Get major axis lenght
+%         MinorAxisLength = cat(1, s.MinorAxisLength);  % Get minor axis lenght
         
-        % Saving information of every particle in one single array. [frame number, area, centroid's x coordinate, centroid's y coordinate, Major Axis Length, Minor Axis Length]
+        % Saving information of every particle in one single array. 
+        % [frame number, area, centroid's x coordinate, centroid's y coordinate]
         if isempty(areas(:))
         
             particles = [particles; i, 0 , 0, 0];  % In case there are no particles in the picture
