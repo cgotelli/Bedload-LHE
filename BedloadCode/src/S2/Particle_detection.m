@@ -14,10 +14,10 @@ if size(img_array, 3) == 1
     img = img_array;                            % Assigns the input array
     %img = bwareaopen(img, low_boundary);        % Removes small objects from image smaller than "low_boundary" number of pixels.
     %img = imclearborder(img, 8);                % Supress points touching the borders of the image
-    s = regionprops(img, 'Area', 'Centroid', 'MajorAxisLength', 'MinorAxisLength'); % Extracts properties from all particles
-    areas = cat(1, s.Area);                     % Stores areas
-    centroids = cat(1, s.Centroid);             % Stores centroids
-%     [areas, centroids] = Particles_info(img);
+%     s = regionprops(img, 'Area', 'Centroid', 'MajorAxisLength', 'MinorAxisLength'); % Extracts properties from all particles
+%     areas = cat(1, s.Area);                     % Stores areas
+%     centroids = cat(1, s.Centroid);             % Stores centroids
+    [areas, centroids] = Particles_info(img);
 %     MajorAxisLength = cat(1, s.MajorAxisLength);% Stores major axis of particles
     %MinorAxisLength = cat(1, s.MinorAxisLength);% Stores minor axis of particles
     
@@ -35,9 +35,9 @@ else
         %img = bwareaopen(~img, low_boundary);       % Delete smaller particles, smaller than given boundary
         %img = imclearborder(img, 8);                % Deletes particles touching border
         s   = regionprops(img, 'Area', 'Centroid'); % Dets properties for all particles
-        areas       = cat(1, s.Area);               % Gets areas
-        centroids   = cat(1, s.Centroid);           % Get centroids
-%         [areas, centroids] = Particles_info(img);
+%         areas       = cat(1, s.Area);               % Gets areas
+%         centroids   = cat(1, s.Centroid);           % Get centroids
+        [areas, centroids] = Particles_info(img);
 
         %MajorAxisLength = cat(1, s.MajorAxisLength);% Get major axis lenght
         %MinorAxisLength = cat(1, s.MinorAxisLength);% Get minor axis lenght

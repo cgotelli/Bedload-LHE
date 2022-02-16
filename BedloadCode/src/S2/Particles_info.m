@@ -1,3 +1,5 @@
+% Function that replaces what was done by regionprops function.
+
 function [objarea,objcentroid] = Particles_info(A)
     Acc = bwconncomp(A);
     nobj = Acc.NumObjects;
