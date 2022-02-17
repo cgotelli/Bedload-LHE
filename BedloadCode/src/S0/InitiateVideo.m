@@ -88,12 +88,14 @@ elseif camera == "laptop" % Clemente's ASUS personal laptop
 elseif camera == "Halle" % Main channel parameters. To be calibrated.
 
     %     % Camera's resolution
-    %     xres        = 640;  % Image's width
-    %     yres        = 480;  % Image's height
-    %     yoffset     = 0;    % yoffset + ydim = total picture height
+    xres        = 2678;  % Image's width
+    yres        = 500;  % Image's height
+    xoffset     = 682;    % yoffset + ydim = total picture height
+    yoffset     = 1500;    % yoffset + ydim = total picture height
+    
     vid = videoinput('gentl', 1, 'Mono8');
     src = getselectedsource(vid);
-    triggerconfig(vid, 'immediate');
+    
     
     src.AcquisitionFrameRate = fps;
     src.AutoGainUpperLimit = 24;
@@ -101,16 +103,14 @@ elseif camera == "Halle" % Main channel parameters. To be calibrated.
     src.Gain = 11.9;
     src.Gamma = 0.6829833984375;
     
-    vid.ROIPosition = [682 1500 2678 500];
-%     vid.FramesPerTrigger = Inf;
-%     vid.TriggerRepeat = Inf;
+    triggerconfig(vid, 'immediate');
+    vid.ROIPosition = [xoffset yoffset xres yres];
     vid.FramesPerTrigger = Inf;
     vid.ReturnedColorspace = 'grayscale';
     vid.LoggingMode = 'memory'; 
     vid.FramesAcquiredFcnCount = EachHowMany; % Number of frames stored in the RAM memory required to trigger the Callback Function "FramesAcquiredFcn".
     vid.FramesAcquiredFcn = {@SaveFrames, fid, matfilesPath, saveFrames, framesPath, extension}; % Definition of actions when FramesAcquiredFcn condition is reached.
     vid.StopFcn = {@closing, fid}; % When the camera stops recording, triggers the '@closing' Function. It closes the logfile.
-
 
 end
 

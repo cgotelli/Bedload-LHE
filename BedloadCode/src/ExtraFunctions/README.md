@@ -4,6 +4,6 @@ This folder contains functions that may be useful for analyzing intermediate res
 
 The summary of functions is:
 
-	- **im2vid.m**
-	- **im2animation.m**
-	-
+- **im2vid.m**
+- **im2animation.m**
+- 

@@ -23,7 +23,7 @@ elseif strcmp(camera, 'Halle')
     GaussFilterSigma    = 1;      % Sigma value for Gauss's Filter
     FilterDiskSize      = 8;        % Disk size bothat filter
     DilatationDiskSize  = 0;        % Disk size for dilation function
-    xdim    = 2700;                  % Image's width
+    xdim    = 2680;                  % Image's width
     ydim    = 500;                  % Image's height
     crop    = 'no';                 % Decide whter will trim the picture or not. 'yes' or 'no'.
     x_0     = 1;                    % bottom-left x-coordinate for cropping the image
