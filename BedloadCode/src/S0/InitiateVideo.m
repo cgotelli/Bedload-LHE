@@ -93,10 +93,17 @@ elseif camera == "Halle" % Main channel parameters. To be calibrated.
     %     yoffset     = 0;    % yoffset + ydim = total picture height
     vid = videoinput('gentl', 1, 'Mono8');
     src = getselectedsource(vid);
-
-    src.AcquisitionFrameRate = fps;
+    triggerconfig(vid, 'immediate');
     
-    vid.ROIPosition = [648 738 2548 1415];
+    src.AcquisitionFrameRate = fps;
+    src.AutoGainUpperLimit = 24;
+    src.BlackLevel = 0.9375;
+    src.Gain = 11.9;
+    src.Gamma = 0.6829833984375;
+    
+    vid.ROIPosition = [682 1500 2678 500];
+%     vid.FramesPerTrigger = Inf;
+%     vid.TriggerRepeat = Inf;
     vid.FramesPerTrigger = Inf;
     vid.ReturnedColorspace = 'grayscale';
     vid.LoggingMode = 'memory'; 
