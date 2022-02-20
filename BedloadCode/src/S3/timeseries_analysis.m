@@ -1,4 +1,4 @@
-function Plot_velocity(velocity,img,frame)
+function timeseries_analysis(velocity,img,frame)
 
 v=velocity(velocity(:,1)==frame,:);
 img1=img(:,:,frame);
@@ -19,9 +19,7 @@ plot(v(:,4),v(:,5),'b*');
 for ii = 1:length(v(:,4))
     text(v(ii,4)+3,v(ii,5)+1,num2str(ii),'Color','r')
 end
+
 hold off
-
-
-
 
 end
