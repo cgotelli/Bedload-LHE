@@ -100,7 +100,7 @@ The general parameters are set at the beginning of the script, and the camera pa
 
 ### Step 3 - Analysis
 
-The script for this step is the next task to address.
+The script for this step is the next task to complete.
 
 ## References
 - Elgueta-Astaburuaga, M. A., & Hassan, M. A. (2017). Experiment on temporal variation of bed load transport in response to changes in sediment supply in streams. *Water Resources Research*, 53, 763–778. https://doi.org/10.1002/2016wr019460
