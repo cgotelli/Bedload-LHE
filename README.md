@@ -89,5 +89,6 @@ Main Folder
 
 
 **References:** 
-- A. Zimmermann et al. Video-based gravel transport measurements with a flume mounted light table. _Earth Surface Processes and Landforms_. 33:2285–2296, May 2008. doi: 10.1002/esp.1675.
-- M. A. Elgueta-Astaburuaga and M. A. Hassan. Experiment on temporal variation of bed load transport in response to changes in sediment supply in streams. _Water Resources Research_. 53:763–778, January 2017. doi: 10.1002/2016wr019460.
+- Elgueta-Astaburuaga, M. A., & Hassan, M. A. (2017). Experiment on temporal variation of bed load transport in response to changes in sediment supply in streams. Water Resources Research, 53, 763–778. https://doi.org/10.1002/2016wr019460
+- Frey, P., Ducottet, C., & Jay, J. (2003). Fluctuations of bed load solid discharge and grain size distribution on steep slopes with image analysis. Experiments in Fluids, 35, 589–597. https://doi.org/10.1007/s00348-003-0707-9
+- Zimmermann, A. E., Church, M., & Hassan, M. A. (2008). Video-based gravel transport measurements with a flume mounted light table. Earth Surface Processes and Landforms, 33, 2285–2296. https://doi.org/10.1002/esp.1675
