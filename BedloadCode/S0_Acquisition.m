@@ -25,7 +25,7 @@ imaqreset   % Clear all variables related to the videoinput object
 camera   = "Halle";     % Options: LESO, office, laptop, Halle. Edit InitiateVideo.m to add options.
 
 % Parallel process
-n   = 4;                % number of cores to use
+n   = 4;                % number of cores to use. Recommended at least two.
 
 % Image acquisition
 fps         = 45;       % number of FPS
