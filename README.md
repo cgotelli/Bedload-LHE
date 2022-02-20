@@ -88,7 +88,8 @@ The S0_Acquisition script is used for recording images from the selected camera.
 First, you need to choose the camera you are going to use. If it is not in the options you can modify the Initiate video parameters and include another option.  
 Second, you need to set the frames per second (fps) to use. Usually it should be between 30-60. It depends on the setup and flow discharge conditions.  
 Third, you have to choose if storing the images as file or not, and their extension. This images are useful during the calibration process, to see the quality of the images and the sharpness of particles.   
-Last, you have to choose how much images must be stored inside each matfile. In other words, each how many seconds you will produce a new matfile and how big will they be.
+Last, you have to choose how much images must be stored inside each matfile. In other words, each how many seconds you will produce a new matfile and how big will they be.  
+Once you press Run, the program will ask you for the folder where to store the matfiles. In that path it will create a folder with the date and time as name. Inside, a *RAW_matfiles* folder will store the created matfiles with the images inside. A logfile containing the time of creation of each matfile will be also stored inside.
 
 ### Step 1 - Image filtering
 
