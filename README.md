@@ -86,8 +86,8 @@ For each step of the process there is a script
 
 The S0_Acquisition script is used for recording images from the selected camera. The output are matfiles with the images inside, and it also has the option of storing the frames in image file format (e.g., png, jpeg, bitmap or tif). The general parameters are set at the beginning of the script, and the camera parameters are predefined inside the InitiateVideo function. These parameters depend on which camera is being used for recording (e.g., LESO, Halle, or standard webcams).  
 First, you need to choose the camera you are going to use. If it is not in the options you can modify the Initiate video parameters and include another option.  
-Second, you need to set the frames per second (fps) to use. Usually it should be between 30-60. It depends on the setup and flow discharge conditions. 
-Third, you have to choose if storing the images as file or not, and their extension. This images are useful during the calibration process, to see the quality of the images and the sharpness of particles.
+Second, you need to set the frames per second (fps) to use. Usually it should be between 30-60. It depends on the setup and flow discharge conditions.  
+Third, you have to choose if storing the images as file or not, and their extension. This images are useful during the calibration process, to see the quality of the images and the sharpness of particles.   
 Last, you have to choose how much images must be stored inside each matfile. In other words, each how many seconds you will produce a new matfile and how big will they be.
 
 ### Step 1 - Image filtering
