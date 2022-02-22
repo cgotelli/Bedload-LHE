@@ -1,11 +1,11 @@
 % Mean_vel
-% Calculates the velocity matching particles between frames i and (i+1). 
-% - It receives the array of filtered particles, the parameters for doing the match of particles between 
+% Calculates the velocity matching particles between frames i and (i+1).
+% - It receives the array of filtered particles, the parameters for doing the match of particles between
 % frames, the path where to save the outputs, and the name of the file to process.
-% - It returns the velocitiy of each particle frame by frame, and the mean velocity of this particles also 
+% - It returns the velocitiy of each particle frame by frame, and the mean velocity of this particles also
 % frame by frame.
 
-function [velocity, mvel] = Mean_vel(final_particles, distMin, distMax, dt, difs_th, x_dev, ...
+function [velocity, mvel] = Mean_vel(camera, final_particles, distMin, distMax, dt, difs_th, x_dev, ...
     SavePath, filename)
 
 num_frames  = final_particles(end,1,1); % Total number of frames to process
@@ -32,35 +32,75 @@ for i = 1:num_frames-1                  % For loop over the first n-1 frames.
         
         for k = 1:size(iks2)
             
-            difs = (log2(areas1(j))-log2(areas2(k)))/log2(areas1(j)); % Difference in areas 
-            
-            % If the absolute difference between areas is lower than the threshold, and the position in y for
-            % the particle in i+1 lies within the given range for the particle in frame i, and the position in
-            % x for the particle in fram i+1 lies within the requiered range for the particle in frame i; then
-            % you have a match.
-            if abs(difs) < difs_th && ... 
-                    igrec1(j) + distMin <igrec2(k) && ... 
-                    abs(iks1(j)-iks2(k)) < x_dev%10 % This 10 it's to be sure that we have "straight" paths
-                % If there is a match, you calculate the distance between centroids. This distance is in px!.
+            if strcmp(camera, "LESO") % Particles going from top to bottom
                 
-                distance = pdist([iks1(j), igrec1(j); iks2(k), igrec2(k)], 'euclidean');
+                difs = (log2(areas1(j))-log2(areas2(k)))/log2(areas1(j)); % Difference in areas
                 
-                % If the distance is within range, you finally establish a pair of particles and continue with
-                % the next particle in frame i.
-                if distance > distMin && distance < distMax    
+                % If the absolute difference between areas is lower than the threshold, and the position in y
+                % for the particle in i+1 lies beyond the given radius for the particle in frame i, and the
+                % position in x for the particle in fram i+1 lies within the requiered range for the particle
+                % in frame i; then you have a match.
+                if abs(difs) < difs_th && ...
+                        igrec1(j) + distMin < igrec2(k) && ...
+                        abs(iks1(j) - iks2(k)) < x_dev % This 10 it's to be sure that we have "straight" paths
+                    % If there is a match, you calculate the distance between centroids. This distance is in px!.
                     
-                    vel = distance/dt; % Velocity (in px!)
+                    distance = pdist([iks1(j), igrec1(j); iks2(k), igrec2(k)], 'euclidean');
                     
-                    % Add all information to an array. This way it is possible to track the particles in the
-                    % images and check validity of the results. The structure of the array is as shown below:
-                    % pairs = [frame number, i-frame centroid's x-coordinate, i-frame centroid's y-coordinate, 
-                    % (i+1)-frame centroid's-x coordinate,(i+1)-frame centroid's y-coordinate, 
-                    % distance between particles, velocity, difference of areas]
-                    pairs = [pairs; i, iks1(j), igrec1(j), iks2(k), igrec2(k), distance, vel, difs]; 
+                    % If the distance is within range, you finally establish a pair of particles and continue with
+                    % the next particle in frame i.
+                    if distance > distMin && distance < distMax
+                        
+                        vel = distance/dt; % Velocity (in px!)
+                        
+                        % Add all information to an array. This way it is possible to track the particles in the
+                        % images and check validity of the results. The structure of the array is as shown below:
+                        % pairs = [frame number, i-frame centroid's x-coordinate, i-frame centroid's y-coordinate,
+                        % (i+1)-frame centroid's-x coordinate,(i+1)-frame centroid's y-coordinate,
+                        % distance between particles, velocity, difference of areas]
+                        pairs = [pairs; i, iks1(j), igrec1(j), iks2(k), igrec2(k), distance, vel, difs];
+                        
+                        aux = aux + 1; % updates aux variable
+                        
+                        break % After the match, it stops looking and moves to the following particle to be matched
+                        
+                    end
                     
-                    aux = aux + 1; % updates aux variable
+                end
+                
+            elseif strcmp(camera, "Halle") % Particles going from bottom to top
+                
+                difs = (log2(areas1(j))-log2(areas2(k)))/log2(areas1(j)); % Difference in areas
+                
+                % If the absolute difference between areas is lower than the threshold, and the position in y
+                % for the particle in i+1 lies beyond the given radius for the particle in frame i, and the
+                % position in x for the particle in fram i+1 lies within the requiered range for the particle
+                % in frame i; then you have a match.
+                if abs(difs) < difs_th && ...
+                        igrec1(j) - distMin > igrec2(k) && ...
+                        abs(iks1(j) - iks2(k)) < x_dev % This 10 it's to be sure that we have "straight" paths
+                    % If there is a match, you calculate the distance between centroids. This distance is in px!.
                     
-                    break % After the match, it stops looking and moves to the following particle to be matched
+                    distance = pdist([iks1(j), igrec1(j); iks2(k), igrec2(k)], 'euclidean');
+                    
+                    % If the distance is within range, you finally establish a pair of particles and continue with
+                    % the next particle in frame i.
+                    if distance > distMin && distance < distMax
+                        
+                        vel = distance/dt; % Velocity (in px!)
+                        
+                        % Add all information to an array. This way it is possible to track the particles in the
+                        % images and check validity of the results. The structure of the array is as shown below:
+                        % pairs = [frame number, i-frame centroid's x-coordinate, i-frame centroid's y-coordinate,
+                        % (i+1)-frame centroid's-x coordinate,(i+1)-frame centroid's y-coordinate,
+                        % distance between particles, velocity, difference of areas]
+                        pairs = [pairs; i, iks1(j), igrec1(j), iks2(k), igrec2(k), distance, vel, difs];
+                        
+                        aux = aux + 1; % updates aux variable
+                        
+                        break % After the match, it stops looking and moves to the following particle to be matched
+                        
+                    end
                     
                 end
                 
@@ -81,18 +121,18 @@ for i = 1:num_frames-1                  % For loop over the first n-1 frames.
     velocity    = pairs; % All the data in pairs is stored
     mv          = mean(velocity(velocity(:, 1) == i, 7)); % Mean velocity in the frame
     
-    % 
+    %
     if isnan(mv)
-    
+        
         mv = NaN;
         
     end
     
     mvel(i, :) = [i, mv]; % Only mean velocity Frame-by-Frame
-
+    
 end
 
 save(fullfile(SavePath, strcat('MeanVel_', filename(10: end))), 'mvel');        % saves mean velocity frame by frame
-save(fullfile(SavePath, strcat('AllInfoVel_', filename(10: end))), 'velocity'); % saves all the information of velocity 
+save(fullfile(SavePath, strcat('AllInfoVel_', filename(10: end))), 'velocity'); % saves all the information of velocity
 
 end

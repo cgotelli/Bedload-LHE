@@ -31,7 +31,7 @@ filtered_particles = filtered_particles(filtered_particles(:,2) > minSize,:);
 % Conditions to fill the matrix based on the number of particles detected on each frame.
 if isempty(filtered_particles) % If no particle is detected in any image inside the array: creates an array of zeros and the index of the image inside the array.
     
-    filtered_particles = [linspace(1,num_frames,num_frames)', zeros(1,num_frames)', zeros(1,num_frames)', zeros(1,num_frames)'];
+    filtered_particles = [linspace(1, num_frames, num_frames)', zeros(1,num_frames)', zeros(1,num_frames)', zeros(1,num_frames)'];
     
 else % If its not empty, checks on each frame if it has particles or not. If it doesn't detect any particle, fills with a row of zeros at the end of the matrix.
     

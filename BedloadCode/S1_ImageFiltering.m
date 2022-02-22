@@ -19,7 +19,7 @@ n   = 4;                % number of cores to use
 % Choose which elements to process: "select" for specific ones, or "all" for everything inside a folder.
 ProcessingMode = 'all';
 
-% What camera are we using?
+% What camera are we processing?
 camera  = "Halle"; % Options: LESO, office, laptop, Halle.
 
 % Loading the parameters to use for filtering. The values must be determined during calibration.
