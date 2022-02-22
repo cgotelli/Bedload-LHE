@@ -6,9 +6,9 @@ if strcmp(camera, "Halle")
     maxparticles= 1000;         % Maximum number of particles to process by frame (~15)
     
     fps         = 45;           % Frame rate for acquisition in the flume
-    distMaxVel  = 180;          % Max distance traveled by a particle between images. To avoid impossible pairs.
-    distMinVel  = 50;           % Min distance traveled by a particle between images. To avoid impossible pairs.
-    distMinIsol = 50;           % Separation to define isolated particles. Necessary for getting a mean velocity.
+    distMaxVel  = 150;          % Max distance traveled by a particle between images. To avoid impossible pairs.
+    distMinVel  = 80;           % Min distance traveled by a particle between images. To avoid impossible pairs.
+    distMinIsol = 40;           % Separation to define isolated particles. Necessary for getting a mean velocity.
     areamin     = 0;            % Lower threshold area to consider a particle in the counting process. In terms of mean.
     areamax     = 5;            % Upper threshold area to consider a particle in the counting process. []
     difs_th     = 0.05;         % logarithmic size threshold for identifying two similar particles.
