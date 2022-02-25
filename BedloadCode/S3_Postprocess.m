@@ -14,7 +14,6 @@ camera = "LESO";
 
 fps = 30; % Image acquisition fps in the lab
 
-
 [outputFilesPath, InfoVelFilenames, BSFilenames, ParticlesFilenames, MeanVelFilenames, SedFilenames, ...
     startFrame, endFrame] = S3dir;
 
@@ -28,8 +27,6 @@ MeanVel = joinOutputs(MeanVelFilenames);
 disp('Done mean velocity per frame')
 Sediment = joinOutputs(SedFilenames);
 disp('Done sediment discharge per frame')
-
-
 
 %%
 
