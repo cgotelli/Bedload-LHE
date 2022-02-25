@@ -3,7 +3,7 @@
 % frames, mean particle velocity by frame, total amount of pixels corresponding to particles, and the sediment
 % discharge computation.
 
-function Matching(filesPath, filenames, SavePath, ProcessingMode, skip, ...
+function Matching(camera, filesPath, filenames, SavePath, ProcessingMode, skip, ...
     distMinIsol, areamin, areamax, lim_width, lim_height, distMinVel, distMaxVel, difs_th, x_dev, ...
     fps, imheight, imwidth, maxparticles)
 
@@ -28,7 +28,7 @@ if strcmp(ProcessingMode, 'select') % For selected matfiles
         
         disp(strcat('We passed the particle filtering' , " -------> " , filenames{j}))
         
-        Mean_vel(final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...
+        Mean_vel(camera, final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...
             SavePath, filenames{j}); % Computes velocity 
         
         disp(strcat('We passed mean velocity computation' , " -------> " , filenames{j}))
@@ -60,7 +60,7 @@ elseif strcmp(ProcessingMode, 'all') % For all matfiles in the folder
             
             disp(strcat(num2str(j), " We passed the particle filtering -------> " , filenames(j).name))
             
-            Mean_vel(final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...
+            Mean_vel(camera, final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...
                 SavePath, filenames(j).name); % Computes velocity and returns the mean velocity in an array
             
             disp(strcat(num2str(j), " We passed the mean velocity computation -------> " , filenames(j).name))

@@ -22,7 +22,7 @@ end
 
 if strcmp(ProcessingMode, 'select')
     
-    [filenames, filesPath] = uigetfile('D:\GitHub\Bedload-LHE\data\', ...
+    [filenames, filesPath] = uigetfile('D:\45fps\202202211456\', ...
         'Select Filtered matfiles to process', '*.mat', 'MultiSelect', 'on'); % Gets the names of the selected files, and stores them in a cell-type variable
     
     % ERROR HANDLE "Please, select at least 2 files to process."
@@ -35,7 +35,7 @@ if strcmp(ProcessingMode, 'select')
     
 elseif strcmp(ProcessingMode, 'all')
     
-    filesPath = uigetdir('D:\GitHub\Bedload-LHE\data', 'Path where Filtered matfiles are stored');
+    filesPath = uigetdir('D:\45fps\202202211456', 'Path where Filtered matfiles are stored');
     
     filenames = dir(fullfile(filesPath, '*.mat')); % Gets all the files with *.mat extension inside the folder, and stores the information in a struct-type variable
     

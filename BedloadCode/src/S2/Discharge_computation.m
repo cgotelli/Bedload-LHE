@@ -37,7 +37,7 @@ for j = 1:length(Particles_filenames)
     
     num_frames      = particles(end, 1); % Total number of frames to process
     meanWindow      = fps; % To smooth velocity time series. In frames. For Zimmermann was +- 15 seconds. Here we want a nearly-instantaneous velocity
-    smooth_meanVel  = smoothdata(mvel(:, 2), 'movmean', meanWindow); % Velocity time series averaged over a window.
+    smooth_meanVel  = smoothdata(mvel(:, 1), 'movmean', meanWindow); % Velocity time series averaged over a window.
     
     sed = zeros(num_frames - 1, 1);  % Empty sediment information array
     

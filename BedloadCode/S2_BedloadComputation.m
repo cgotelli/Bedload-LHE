@@ -8,30 +8,23 @@
 
 % -----------------------------------------------------------------------------------------------------------
 
-clear all;
+% clear all;
 close all;
 % clc
 
 %% Computation setup
 
-ProcessingMode = 'all';   % "select" or "all" folders
+ProcessingMode = 'all'; % "select" or "all" folders
 
-n           = 4;            % number of cores to use
-maxparticles= 15;           % Maximum number of particles to process by frame (~15)
+% What camera are we processing?
+camera = "Halle";       % Options: LESO, office, laptop, Halle.
 
-fps         = 30;           % Frame rate for acquisition in the flume
-distMaxVel  = 120;           % Max distance traveled by a particle between images. To avoid impossible pairs.
-distMinVel  = 10;           % Min distance traveled by a particle between images. To avoid impossible pairs.
-distMinIsol = 18;           % Separation to define isolated particles. Necessary for getting a mean velocity.
-areamin     = 0.5;          % Lower threshold area to consider a particle in the counting process. In terms of mean.
-areamax     = 5;            % Upper threshold area to consider a particle in the counting process. []
-difs_th     = 0.05;         % logarithmic size threshold for identifying two similar particles.
-x_dev       = 10;           % maximum allowed value of horizontal deviation between two consecutive images (in px).
-lim_width   = 0.05;         % fraction of the image to exclude in the x axis for each border.
-lim_height  = 0.05;         % fraction of the image to exclude in the y axis for each border.
-skip        = 1;            % number of matfiles to skip for velocity computation. One each "skip" files.
-imwidth     = 2700;         % image width
-imheight    = 500;          % image height
+n      = 8;             % number of cores to use
+skip   = 1;             % number of matfiles to skip for velocity computation. One each "skip" files.
+
+% Loading parameters depending on source of images
+[maxparticles, fps, distMaxVel, distMinVel, distMinIsol, areamin, areamax, difs_th, x_dev, ...
+    lim_width, lim_height, imwidth, imheight] = paramsComputation(camera);
 
 % Determines files' directories & creates folder to export filtered images
 [filesPath, filenames, SavePath] = S2dir(ProcessingMode, n);
@@ -40,10 +33,10 @@ imheight    = 500;          % image height
 
 tic
 
-Matching(filesPath, filenames, SavePath, ProcessingMode, skip, distMinIsol, ...
+Matching(camera, filesPath, filenames, SavePath, ProcessingMode, skip, distMinIsol, ...
     areamin, areamax, lim_width, lim_height, distMinVel, distMaxVel, difs_th, x_dev, fps,...
     imheight, imwidth, maxparticles);
 
-%Discharge_computation(SavePath, fps, imheight, imwidth);
+Discharge_computation(SavePath, fps, imheight, imwidth);
 
 toc
