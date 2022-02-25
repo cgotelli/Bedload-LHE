@@ -29,6 +29,8 @@ q6 = '#F28522';
 q7 = '#A6761D';
 
 
+set(0,'defaultFigurePosition',[100 500 1500 300]);
+
 set(groot,'defaultTextFontName','CMU Serif'); % 'CMU Serif'
 set(groot,'defaultAxesFontName','CMU Serif');
 set(groot,'defaultTextInterpreter','Latex');  % write using Latex commands
