@@ -14,13 +14,13 @@ close all;
 
 %% Computation setup
 
-ProcessingMode = 'all';   % "select" or "all" folders
+ProcessingMode = 'all'; % "select" or "all" folders
 
 % What camera are we processing?
-camera = "Halle";      % Options: LESO, office, laptop, Halle.
+camera = "Halle";       % Options: LESO, office, laptop, Halle.
 
-n      = 4;            % number of cores to use
-skip   = 1;            % number of matfiles to skip for velocity computation. One each "skip" files.
+n      = 8;             % number of cores to use
+skip   = 1;             % number of matfiles to skip for velocity computation. One each "skip" files.
 
 % Loading parameters depending on source of images
 [maxparticles, fps, distMaxVel, distMinVel, distMinIsol, areamin, areamax, difs_th, x_dev, ...
@@ -37,6 +37,6 @@ Matching(camera, filesPath, filenames, SavePath, ProcessingMode, skip, distMinIs
     areamin, areamax, lim_width, lim_height, distMinVel, distMaxVel, difs_th, x_dev, fps,...
     imheight, imwidth, maxparticles);
 
-%Discharge_computation(SavePath, fps, imheight, imwidth);
+Discharge_computation(SavePath, fps, imheight, imwidth);
 
 toc

@@ -11,7 +11,7 @@ black_surface = zeros(n, 1);       % Empty array for storing information
 
 for i = 1:n                     % Loop over all frames
     
-    black_surface(i, 1)= xdim*ydim - sum(sum(filtered_images(:, :, i))); % Number of pixels - Number of white pixels
+    black_surface(i, 1)= sum(sum(filtered_images(:, :, i))) ; % Number of white pixels
     
 end
 

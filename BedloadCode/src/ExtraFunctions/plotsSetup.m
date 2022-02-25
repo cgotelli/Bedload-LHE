@@ -29,7 +29,7 @@ q6 = '#F28522';
 q7 = '#A6761D';
 
 
-set(0,'defaultFigurePosition',[100 500 1500 300]);
+set(0,'defaultFigurePosition',[100 500 1500 200]);
 
 set(groot,'defaultTextFontName','CMU Serif'); % 'CMU Serif'
 set(groot,'defaultAxesFontName','CMU Serif');

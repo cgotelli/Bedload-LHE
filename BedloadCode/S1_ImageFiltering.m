@@ -13,14 +13,14 @@ clear all;  % Clear the workspace
 
 %% Filtering setup
 % We define the different parameters used by the functions.
-FileType = 'matfile';   % Choose in what format are the RAW images: "matfile" or "video"
+FileType = 'video';   % Choose in what format are the RAW images: "matfile" or "video"
 n   = 4;                % number of cores to use
 
 % Choose which elements to process: "select" for specific ones, or "all" for everything inside a folder.
 ProcessingMode = 'all';
 
 % What camera are we processing?
-camera  = "Halle"; % Options: LESO, office, laptop, Halle.
+camera  = "LESO"; % Options: LESO, office, laptop, Halle.
 
 % Loading the parameters to use for filtering. The values must be determined during calibration.
 [GaussFilterSigma, FilterDiskSize, DilatationDiskSize, xdim, ydim, crop, x_0, x_end,...

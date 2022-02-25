@@ -10,7 +10,7 @@ function [velocity, mvel] = Mean_vel(camera, final_particles, distMin, distMax, 
 
 num_frames  = final_particles(end,1,1); % Total number of frames to process
 pairs       = [];                       % Empty array for pairs of particles
-mvel        = zeros(num_frames-1,2);    % Empty array for mean velocity (the last frame is not counted as there is no num_frames+1 frame to compute the velocity)
+mvel        = zeros(num_frames-1,1);    % Empty array for mean velocity (the last frame is not counted as there is no num_frames+1 frame to compute the velocity)
 
 for i = 1:num_frames-1                  % For loop over the first n-1 frames.
     
@@ -128,7 +128,7 @@ for i = 1:num_frames-1                  % For loop over the first n-1 frames.
         
     end
     
-    mvel(i, :) = [i, mv]; % Only mean velocity Frame-by-Frame
+    mvel(i, :) = [mv]; % Only mean velocity Frame-by-Frame
     
 end
 
