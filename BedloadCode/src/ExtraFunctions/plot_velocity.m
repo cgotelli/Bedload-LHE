@@ -10,7 +10,7 @@ imshow(img1);
 
 hold on
 
-plot(v(:,2), v(:,3), 'r.', 'MarkerSize',15);
+plot(v(:,2), v(:,3), '.r', 'MarkerSize',15);
 
 for ii = 1:length(v(:,2))
     text(v(ii,2)+ 3, v(ii,3) + 1, num2str(ii), 'Color', 'g')
