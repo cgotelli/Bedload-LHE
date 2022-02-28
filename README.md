@@ -8,7 +8,7 @@ The algorithm to estimate sediment transport from images is based in the work or
 
 ## Structure of the code
 
-The entire process is divided in three steps of sediment transport computing, and one previous step of image aquisition that is also done with Matlab.
+The entire process is divided in three steps of sediment transport computing, and one previous step of image aquisition that is also done with Matlab. The complementary functions allow to analyze intermediate results and which helps, for example, with the calibration process. The code also allows to process selected files, so you can apply the 
 
 - **Step 0 - Acquisition:** This step uses the camera to capture images at a specific frame rate, and store them into Matfiles and/or image files (bmp, jpeg, png, etc.). This step can also be done with any external software that stores images as video files. These videos are also allowed to be processed.
 
@@ -86,14 +86,16 @@ For each step of the process there is a script
 
 The *S0_Acquisition* script is used for recording images from the selected camera. This script generates matfiles containing the images taken by the camera. The code has the option of storing the frames in image file format (e.g., png, jpeg, bitmap or tif).  
 The general parameters are set at the beginning of the script, and the camera parameters are predefined inside the *InitiateVideo* function. These parameters depend on which camera is being used for recording (e.g., LESO, Halle, or standard webcams). The general process for using this script is as follows:  
-1. First, you need to choose the camera you are going to use. If it is not in the options you can modify the Initiate video parameters and include another option.  
-2. Second, you need to set the frames per second (fps) to use. Usually it should be between 30-60. It depends on the setup and flow discharge conditions.  
-3. Third, you have to choose if storing the images as file or not, and their extension. This images are useful during the calibration process, to see the quality of the images and the sharpness of particles.   
-4. Last, you have to choose how much images must be stored inside each matfile. In other words, each how many seconds you will produce a new matfile and how big will they be.  
-5. Once you press **Run**, the program will ask you for the folder where to store the matfiles. In that path it will create a folder with the date and time as name. Inside, a *RAW_matfiles* folder will store the created matfiles with the images inside. A logfile containing the time of creation of each matfile will be also stored inside.
+1. First, you need to choose the camera you are going to use. If it is not in the options you can modify the *Initiate video* function parameters and include another option.  
+2. Second, you need to set the frames per second (fps) to use. Usually, in the laboratory it should be between 30-60. It depends on the setup and flow discharge conditions.  
+3. Third, you have to choose if storing the images as file or not, and their extension. This images are useful during the calibration process, to see the quality of the images and the particles' sharpness.   
+4. Last, you have to choose how many images will be stored inside each matfile. In other words, each how many seconds you will produce a new matfile and how big will their size.  
+5. Once you press **Run**, the program will ask you for the folder where to store the matfiles. In that path it will create a folder with the date and time as name. Inside, a *RAW_matfiles* subfolder will store the created matfiles filled with images. A logfile where the time of creation of each matfile will be also stored inside.
 
 ### Step 1 - Image filtering
 
+The *S1_ImageFiltering* script applies the filtering to RAW images obtained from video acquisition. It works for several matfiles in the same folder or for a single file. The format on which the frames are stored must be chosen at the beginning of the script, as well as the number of files to process (it can process a list of selected files or all files inside a folder).  
+As in the Acquisition step, the source camera of the images must be specified. This information will allow to load all the correspondent parameters
 
 ### Step 2 - Bead load computation
 
