@@ -8,9 +8,13 @@
 
 % To run it needs the following functions:
 % * FrameToMatfile.m
-% * FirstThings.m
+% * S0dir.m
 % * InitiateVideo.m
 % * Recording.m
+% * closing.m
+% * SaveFrames.m
+% * stopVideo.m
+% * writeImage.m
 % -----------------------------------------------------------------------------------------------------------
 
 close all;  % Close all windows
@@ -28,8 +32,8 @@ camera   = "Halle";     % Options: LESO, office, laptop, Halle. Edit InitiateVid
 n   = 4;                % number of cores to use. Recommended at least two.
 
 % Image acquisition
-fps         = 45;       % number of FPS
-saveFrames  = 'n';      % Want to save the original frames? (y or n)
+fps         = 40;       % number of FPS
+saveFrames  = 'y';      % Want to save the original frames? (y or n)
 extension   = 'bmp';    % Extension format for exporting images: 'tiff', 'jpeg', 'bmp', 'png'
 EachHowMany = fps*5;    % How many frames will have each matfile. Number = fps * #seconds (5 in this case).
 

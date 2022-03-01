@@ -104,14 +104,15 @@ elseif camera == "Halle" % Main channel parameters. To be calibrated.
     src.Gamma = 0.6829833984375;
     
     triggerconfig(vid, 'immediate');
-    vid.ROIPosition = [xoffset yoffset xres yres];
     vid.FramesPerTrigger = Inf;
-    vid.ReturnedColorspace = 'grayscale';
-    vid.LoggingMode = 'memory'; 
     vid.FramesAcquiredFcnCount = EachHowMany; % Number of frames stored in the RAM memory required to trigger the Callback Function "FramesAcquiredFcn".
     vid.FramesAcquiredFcn = {@SaveFrames, fid, matfilesPath, saveFrames, framesPath, extension}; % Definition of actions when FramesAcquiredFcn condition is reached.
+    vid.LoggingMode = 'memory'; 
+    vid.ReturnedColorspace = 'grayscale';
+    vid.ROIPosition = [xoffset yoffset xres yres];
     vid.StopFcn = {@closing, fid}; % When the camera stops recording, triggers the '@closing' Function. It closes the logfile.
-
+    vid.TriggerRepeat = Inf;
+    
 end
 
 end
