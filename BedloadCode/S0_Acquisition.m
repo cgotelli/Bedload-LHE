@@ -29,13 +29,13 @@ imaqreset   % Clear all variables related to the videoinput object
 camera   = "Halle";     % Options: LESO, office, laptop, Halle. Edit InitiateVideo.m to add options.
 
 % Parallel process
-n   = 4;                % number of cores to use. Recommended at least two.
+n   = 8;                % number of cores to use. Recommended at least two.
 
 % Image acquisition
-fps         = 40;       % number of FPS
-saveFrames  = 'y';      % Want to save the original frames? (y or n)
+fps         = 45;       % number of FPS
+saveFrames  = 'n';      % Want to save the original frames? (y or n)
 extension   = 'bmp';    % Extension format for exporting images: 'tiff', 'jpeg', 'bmp', 'png'
-EachHowMany = fps*5;    % How many frames will have each matfile. Number = fps * #seconds (5 in this case).
+EachHowMany = fps*10;    % How many frames will have each matfile. Number = fps * #seconds (5 in this case).
 
 %% Prepare folders and LogFile
 
