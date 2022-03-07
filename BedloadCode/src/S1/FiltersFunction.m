@@ -15,9 +15,12 @@ for i = 1:n
         img = data(:,:,i);
     end
 
-    img = imgaussfilt(img, GaussFilterSigma, 'FilterSize', 5); % Gaussian filter with given sigma parameter
+    img = imgaussfilt(img, GaussFilterSigma, 'FilterSize', 21); % Gaussian filter with given sigma parameter
+%     img = medfilt2(img);
     img = imbothat(img,strel('disk', FilterDiskSize)); % Applies bothat filter. This function is for dark particles over a light background.
-    img = imbinarize(img, max(0.02, min(graythresh(img),0.1))); % Turn the image into B&W format (logical). The threshold depends on the image.
+    img = imadjust(img);
+    %img = imbinarize(img, max(0.02, min(graythresh(img),0.1))); % Turn the image into B&W format (logical). The threshold depends on the image.
+    img = imbinarize(img, graythresh(img)); % Turn the image into B&W format (logical). The threshold depends on the image.
     img = bwareaopen(img, minSize);        % Removes small objects from image smaller than "low_boundary" number of pixels.
     % imfill(~img,'holes') ;
     if DilatationDiskSize ~= 0

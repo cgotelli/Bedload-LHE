@@ -21,7 +21,7 @@ if strcmp(camera, 'LESO')
 elseif strcmp(camera, 'Halle')
     
     GaussFilterSigma    = 1;      % Sigma value for Gauss's Filter
-    FilterDiskSize      = 8;        % Disk size bothat filter
+    FilterDiskSize      = 20;        % Disk size bothat filter
     DilatationDiskSize  = 0;        % Disk size for dilation function
     xdim    = 2712;                  % Image's width
     ydim    = 500;                  % Image's height

@@ -17,7 +17,7 @@ FileType = 'matfile';   % Choose in what format are the RAW images: "matfile" or
 n   = 8;                % number of cores to use
 
 % Choose which elements to process: "select" for specific ones, or "all" for everything inside a folder.
-ProcessingMode = 'all';
+ProcessingMode = 'select';
 
 % What camera are we processing?
 camera  = "Halle"; % Options: LESO, office, laptop, Halle.
@@ -30,9 +30,11 @@ camera  = "Halle"; % Options: LESO, office, laptop, Halle.
 [filenames, filesPath, FilteredPath] = S1dir(n, FileType, ProcessingMode);
 
 %% Filtering execution
+
 tic
 Filtering(filesPath, filenames, FileType, ProcessingMode, FilteredPath, ...
     xdim, ydim, x_0, x_end, y_0, y_end, ...
     GaussFilterSigma, FilterDiskSize, DilatationDiskSize, crop, minSize)
 toc
+
 fprintf("c'est fini\n")

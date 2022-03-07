@@ -132,6 +132,8 @@ for i = 1:num_frames-1                  % For loop over the first n-1 frames.
     
 end
 
+mvel(end+1, :) = [mv]; % Only mean velocity Frame-by-Frame
+
 save(fullfile(SavePath, strcat('MeanVel_', filename(10: end))), 'mvel');        % saves mean velocity frame by frame
 save(fullfile(SavePath, strcat('AllInfoVel_', filename(10: end))), 'velocity'); % saves all the information of velocity
 
