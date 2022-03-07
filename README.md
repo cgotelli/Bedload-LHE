@@ -95,7 +95,7 @@ The general parameters are set at the beginning of the script, and the camera pa
 ### Step 1 - Image filtering
 
 The *S1_ImageFiltering* script applies the filtering to RAW images obtained from video acquisition. It works for several matfiles in the same folder or for a single file. The format on which the frames are stored must be chosen at the beginning of the script, as well as the number of files to process (it can process a list of selected files or all files inside a folder).  
-As in the Acquisition step, the source camera of the images must be specified. This information will allow to load all the correspondent parameters
+As done in the Acquisition step, the source camera of the images must be specified as well. This information will allow to load all the calibrated parameters for the chosen camera already stored in the function *paramsFiltering.m*. 
 
 ### Step 2 - Bead load computation
 
