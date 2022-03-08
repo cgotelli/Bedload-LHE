@@ -7,9 +7,9 @@ function [filtered_images] = FiltersFunction(data, xdim,ydim, n, GaussFilterSigm
 %
 filtered_images = false(ydim, xdim, n);
 
-xlc = [50 35 1 1];
+xlc = [55 40 1 1];
 ylc = [500 0 0 500];
-xrc = [2712 2712 2685 2677 ];
+xrc = [2712 2712 2680 2670 ];
 yrc = [0 500 500 0];
 masklc = poly2mask(xlc,ylc,500,2712);
 maskrc = poly2mask(xrc,yrc,500,2712);

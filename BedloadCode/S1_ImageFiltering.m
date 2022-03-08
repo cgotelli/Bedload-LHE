@@ -17,7 +17,7 @@ FileType = 'matfile';   % Choose in what format are the RAW images: "matfile" or
 n   = 8;                % number of cores to use
 
 % Choose which elements to process: "select" for specific ones, or "all" for everything inside a folder.
-ProcessingMode = 'all';
+ProcessingMode = 'select';
 
 % What camera are we processing?
 camera  = "Halle"; % Options: LESO, office, laptop, Halle.
