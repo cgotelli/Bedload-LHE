@@ -10,7 +10,7 @@ close all;
 
 %% Outputs joining  
 
-camera = "LESO";
+camera = "Halle";
 
 fps = 45; % Image acquisition fps in the lab
 
@@ -30,7 +30,7 @@ disp('Done sediment discharge per frame')
 
 %%
 
-window = 45;
+window = 1;
 normplot = 'no';
 plotTimeSeries(BS,'BS', normplot, window, fps)
 plotTimeSeries(Sediment,'Sediment', normplot, window, fps)

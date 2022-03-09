@@ -7,13 +7,17 @@ function [filtered_images] = FiltersFunction(data, xdim,ydim, n, GaussFilterSigm
 %
 filtered_images = false(ydim, xdim, n);
 
-xlc = [55 40 1 1];
+xlc = [55 40 0 0];
 ylc = [500 0 0 500];
 xrc = [2712 2712 2680 2670 ];
 yrc = [0 500 500 0];
 masklc = poly2mask(xlc,ylc,500,2712);
 maskrc = poly2mask(xrc,yrc,500,2712);
 complete_mask = masklc + maskrc;
+meanimg = uint8(mean(data,3));
+
+sens = 0.53;
+filtsize = 5;
 
 for i = 1:n
 
@@ -23,19 +27,20 @@ for i = 1:n
         img = data(:,:,i);
     end
 
-    img = imgaussfilt(img, GaussFilterSigma, 'FilterSize', 21); % Gaussian filter with given sigma parameter
-    %     img = medfilt2(img);
-    img = imbothat(img,strel('disk', FilterDiskSize)); % Applies bothat filter. This function is for dark particles over a light background.
-    img = imadjust(img);
+%     img = imgaussfilt(img, GaussFilterSigma, 'FilterSize', filtsize); % Gaussian filter with given sigma parameter
+    img = medfilt2(img);
+%     img = imbothat(img,strel('disk', FilterDiskSize)); % Applies bothat filter. This function is for dark particles over a light background.
+%     img = imadjust(img);
     %img = imbinarize(img, max(0.02, min(graythresh(img),0.1))); % Turn the image into B&W format (logical). The threshold depends on the image.
-    img = imbinarize(img, graythresh(img)); % Turn the image into B&W format (logical). The threshold depends on the image.
-    img = bwareaopen(img, minSize);         % Removes small objects from image smaller than "low_boundary" number of pixels.
+    img = imbinarize(img,'adaptive','ForegroundPolarity','dark','Sensitivity', sens);
+%     img = imbinarize(img, graythresh(img)); % Turn the image into B&W format (logical). The threshold depends on the image.
+    img = bwareaopen(~img, minSize);         % Removes small objects from image smaller than "low_boundary" number of pixels.
     img = img.*~complete_mask;
 
     % imfill(~img,'holes') ;
     if DilatationDiskSize ~= 0
         img = imdilate(img,strel('disk',DilatationDiskSize)); % Dilates white pixels/particles to give a rounded shape.
     end
-    filtered_images(:,:,i) = img;          %9/11/2021 modification: '= img' replaces '= ~img'
+    filtered_images(:,:,i) = img;          
 end
 end

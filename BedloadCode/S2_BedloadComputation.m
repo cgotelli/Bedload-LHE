@@ -14,7 +14,7 @@ close all;
 
 %% Computation setup
 
-ProcessingMode = 'select'; % "select" or "all" folders
+ProcessingMode = 'all'; % "select" or "all" folders
 
 % What camera are we processing?
 camera = "Halle";       % Options: LESO, office, laptop, Halle.
@@ -37,6 +37,6 @@ Matching(camera, filesPath, filenames, SavePath, ProcessingMode, skip, distMinIs
     areamin, areamax, lim_width, lim_height, distMinVel, distMaxVel, difs_th, x_dev, fps,...
     imheight, imwidth, maxparticles);
 
-% Discharge_computation(SavePath, fps, imheight, imwidth);
+Discharge_computation(SavePath, fps, imheight, imwidth);
 
 toc
