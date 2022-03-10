@@ -3,21 +3,21 @@
 % the watershed transformation applied in the new filter.
 
 function [filtered_images] = FiltersFunction(data, xdim,ydim, n, GaussFilterSigma, ...
-    FilterDiskSize, DilatationDiskSize, minSize)
+    FilterDiskSize, DilatationDiskSize, minSize, maxSize)
 %
 filtered_images = false(ydim, xdim, n);
 
-xlc = [55 40 0 0];
-ylc = [500 0 0 500];
-xrc = [2712 2712 2680 2670 ];
-yrc = [0 500 500 0];
-masklc = poly2mask(xlc,ylc,500,2712);
-maskrc = poly2mask(xrc,yrc,500,2712);
-complete_mask = masklc + maskrc;
-meanimg = uint8(mean(data,3));
+% xlc = [55 40 0 0];
+% ylc = [500 0 0 500];
+% xrc = [2712 2712 2680 2670 ];
+% yrc = [0 500 500 0];
+% masklc = poly2mask(xlc,ylc,500,2712);
+% maskrc = poly2mask(xrc,yrc,500,2712);
+% complete_mask = masklc + maskrc;
+% meanimg = uint8(mean(data,3));
 
 sens = 0.53;
-filtsize = 5;
+% filtsize = 5;
 
 for i = 1:n
 
@@ -34,8 +34,10 @@ for i = 1:n
     %img = imbinarize(img, max(0.02, min(graythresh(img),0.1))); % Turn the image into B&W format (logical). The threshold depends on the image.
     img = imbinarize(img,'adaptive','ForegroundPolarity','dark','Sensitivity', sens);
 %     img = imbinarize(img, graythresh(img)); % Turn the image into B&W format (logical). The threshold depends on the image.
-    img = bwareaopen(~img, minSize);         % Removes small objects from image smaller than "low_boundary" number of pixels.
-    img = img.*~complete_mask;
+%     img = bwareaopen(~img, minSize);         % Removes small objects from image smaller than "minSize" number of pixels.
+    img = bwareafilt(~img, [minSize maxSize]);
+    
+%     img = img.*~complete_mask;
 
     % imfill(~img,'holes') ;
     if DilatationDiskSize ~= 0

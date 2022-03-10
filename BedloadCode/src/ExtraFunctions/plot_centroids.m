@@ -24,7 +24,7 @@ if single == 1
     figure(n) % Opens the figure in a new specific window
     imshow(images(:, :, n)) % Plots the image
     hold on
-    plot(filtered(:, 3), filtered(:, 4), 'r.', 'LineWidth', 2, 'MarkerSize', 20) % Plots the centroids
+    plot(filtered(:, 3), filtered(:, 4), 'r*', 'LineWidth', 2, 'MarkerSize', 5, MarkerEdgeColor= 'red') % Plots the centroids
 
 % For image sequence
 elseif single == 0
@@ -35,7 +35,7 @@ elseif single == 0
         title(['Frame #: ', num2str(i)]) % Shows frame number in title
         imshow(images(:, :, i)) % Plots the image
         hold on
-        plot(filtered(:, 3), filtered(:, 4), 'r.', 'LineWidth', 2, 'MarkerSize', 20) % Plots the centroids
+        plot(filtered(:, 3), filtered(:, 4), 'r*', 'LineWidth', 2, 'MarkerSize', 20) % Plots the centroids
         pause(1/fps) % Pause according to selected fps
     end
     

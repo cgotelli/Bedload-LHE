@@ -2,7 +2,7 @@
 % More options can be added below. Remember to change the value in main function S1_ImageFiltering
 
 function [GaussFilterSigma, FilterDiskSize, DilatationDiskSize, xdim, ydim, crop, x_0, x_end,...
-    y_0, y_end, minSize] = paramsFiltering(camera)
+    y_0, y_end, minSize, maxSize] = paramsFiltering(camera)
 
 if strcmp(camera, 'LESO')
     
@@ -30,7 +30,8 @@ elseif strcmp(camera, 'Halle')
     x_end   = 640;                  % top-right x-coordinate for cropping the image
     y_0     = 1;                    % bottom-left y-coordinate for cropping the image
     y_end   = 480;                  % top-right y-coordinate for cropping the image
-    minSize = 50;                   % Minimum size to consider a cluster as a particle (in px)
+    minSize = 25;                   % Minimum size to consider a cluster as a particle (in px)
+    maxSize = 500;                   % Maximum size to consider a cluster as a particle (in px)
     
 elseif strcmp(camera, 'office')
     GaussFilterSigma    = 0.5;      % Sigma value for Gauss's Filter

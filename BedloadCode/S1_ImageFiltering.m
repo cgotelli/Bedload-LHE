@@ -24,7 +24,7 @@ camera  = "Halle"; % Options: LESO, office, laptop, Halle.
 
 % Loading the parameters to use for filtering. The values must be determined during calibration.
 [GaussFilterSigma, FilterDiskSize, DilatationDiskSize, xdim, ydim, crop, x_0, x_end,...
-    y_0, y_end, minSize] = paramsFiltering(camera);
+    y_0, y_end, minSize, maxSize] = paramsFiltering(camera);
 
 % Determines files' directories & creates folder to export filtered images
 [filenames, filesPath, FilteredPath] = S1dir(n, FileType, ProcessingMode);
@@ -34,7 +34,7 @@ camera  = "Halle"; % Options: LESO, office, laptop, Halle.
 tic
 Filtering(filesPath, filenames, FileType, ProcessingMode, FilteredPath, ...
     xdim, ydim, x_0, x_end, y_0, y_end, ...
-    GaussFilterSigma, FilterDiskSize, DilatationDiskSize, crop, minSize)
+    GaussFilterSigma, FilterDiskSize, DilatationDiskSize, crop, minSize, maxSize)
 toc
 
 fprintf("c'est fini\n")

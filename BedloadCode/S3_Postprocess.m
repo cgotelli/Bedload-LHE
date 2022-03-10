@@ -20,7 +20,7 @@ fps = 45; % Image acquisition fps in the lab
 VelDetail = joinOutputs(InfoVelFilenames);
 disp('Done velocity computing information per frame')
 BS = joinOutputs(BSFilenames);
-% disp('Done black surface per frame')
+disp('Done black surface per frame')
 % Particles = joinOutputs(ParticlesFilenames);
 % disp('Done with (all) particles information per frame')
 MeanVel = joinOutputs(MeanVelFilenames);
