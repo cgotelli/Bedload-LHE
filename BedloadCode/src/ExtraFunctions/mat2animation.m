@@ -1,5 +1,5 @@
 
-function im2animation(images, ptime)
+function mat2animation(images, ptime)
 
 for i = 1:size(images,3)
 

@@ -31,7 +31,7 @@ elseif strcmp(camera, 'Halle')
     y_0     = 1;                    % bottom-left y-coordinate for cropping the image
     y_end   = 480;                  % top-right y-coordinate for cropping the image
     minSize = 25;                   % Minimum size to consider a cluster as a particle (in px)
-    maxSize = 1000;                  % Maximum size to consider a cluster as a particle (in px)
+    maxSize = 500;                  % Maximum size to consider a cluster as a particle (in px)
     
 elseif strcmp(camera, 'office')
     GaussFilterSigma    = 0.5;      % Sigma value for Gauss's Filter

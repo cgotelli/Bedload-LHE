@@ -14,7 +14,7 @@ close all;
 
 %% Computation setup
 
-ProcessingMode = 'select'; % "select" or "all" folders
+ProcessingMode = 'all'; % "select" or "all" folders
 
 % What camera are we processing?
 camera = "Halle";       % Options: LESO, office, laptop, Halle.
