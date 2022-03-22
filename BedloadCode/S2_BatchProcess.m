@@ -33,7 +33,9 @@ for i = 1:length(subFolders)
 
     filesPath = fullfile(foldersPath, subFolders(i).name,'Filtered');
 
+    disp('\n------------------------------------------\n')
     disp(subFolders(i).name)
+    disp('\n------------------------------------------')
 
     filenames = dir(fullfile(filesPath, '*.mat'));
     OutputPath = fullfile(filesPath, '..', 'Output');

@@ -36,7 +36,9 @@ for i = 1:length(subFolders)
 
     filesPath = fullfile(foldersPath, subFolders(i).name,'RAW_matfiles');
     
+    disp('\n------------------------------------------\n')
     disp(subFolders(i).name)
+    disp('\n------------------------------------------')
 
     filenames = dir(fullfile(filesPath, '*.mat'));
     FilteredPath = fullfile(filesPath, '..', 'Filtered');
