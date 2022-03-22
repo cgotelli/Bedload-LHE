@@ -29,16 +29,14 @@ camera  = "Halle"; % Options: LESO, office, laptop, Halle.
 % Determines files' directories & creates folder to export filtered images
 [foldersPath, subFolders] = S1dirBatch(n);
 
-% for para las subcarpetas
-% filenames, filesPath, FilteredPath
-
+% For loop over all subfolders containing RAW images.
 for i = 1:length(subFolders)
 
     filesPath = fullfile(foldersPath, subFolders(i).name,'RAW_matfiles');
     
-    disp('\n------------------------------------------\n')
+    fprintf('\n------------------------------------------\n\n')
     disp(subFolders(i).name)
-    disp('\n------------------------------------------')
+    fprintf('\n------------------------------------------\n\n')
 
     filenames = dir(fullfile(filesPath, '*.mat'));
     FilteredPath = fullfile(filesPath, '..', 'Filtered');

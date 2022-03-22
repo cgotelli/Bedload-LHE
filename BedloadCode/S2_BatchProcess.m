@@ -29,13 +29,14 @@ skip   = 1;             % number of matfiles to skip for velocity computation. O
 % Determines files' directories & creates folder to export filtered images
 [foldersPath, subFolders] = S2dirBatch(n);
 
+% For loop over all subfolders containing filtered images.
 for i = 1:length(subFolders)
 
     filesPath = fullfile(foldersPath, subFolders(i).name,'Filtered');
 
-    disp('\n------------------------------------------\n')
+    fprintf('\n------------------------------------------\n\n')
     disp(subFolders(i).name)
-    disp('\n------------------------------------------')
+    fprintf('\n------------------------------------------\n\n')
 
     filenames = dir(fullfile(filesPath, '*.mat'));
     OutputPath = fullfile(filesPath, '..', 'Output');
