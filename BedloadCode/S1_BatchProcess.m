@@ -1,4 +1,4 @@
-%% Step 1 - Image filtering
+%% Step 1 - Image filtering for a batch
 
 % This script applies the filtering to RAW images obtained from video acquisition. It works for several matfiles
 % in the same folder or for a single file.
@@ -27,14 +27,29 @@ camera  = "Halle"; % Options: LESO, office, laptop, Halle.
     y_0, y_end, minSize, maxSize] = paramsFiltering(camera);
 
 % Determines files' directories & creates folder to export filtered images
-[filenames, filesPath, FilteredPath] = S1dir(n, FileType, ProcessingMode);
+[foldersPath, subFolders] = S1dirBatch(n);
 
-%% Filtering execution
+% for para las subcarpetas
+% filenames, filesPath, FilteredPath
 
-tic
-Filtering(filesPath, filenames, FileType, ProcessingMode, FilteredPath, ...
-    xdim, ydim, x_0, x_end, y_0, y_end, ...
-    GaussFilterSigma, FilterDiskSize, DilatationDiskSize, crop, minSize, maxSize)
-toc
+for i = 1:length(subFolders)
 
-fprintf("c'est fini\n")
+    filesPath = fullfile(foldersPath, subFolders(i).name,'RAW_matfiles');
+    
+    disp('\n------------------------------------------\n')
+    disp(subFolders(i).name)
+    disp('\n------------------------------------------')
+
+    filenames = dir(fullfile(filesPath, '*.mat'));
+    FilteredPath = fullfile(filesPath, '..', 'Filtered');
+
+    % If the saving folder does not exist, it makes it
+    if ~exist(FilteredPath, 'dir')
+        mkdir(FilteredPath)
+    end
+
+    Filtering(filesPath, filenames, FileType, ProcessingMode, FilteredPath, ...
+        xdim, ydim, x_0, x_end, y_0, y_end, ...
+        GaussFilterSigma, FilterDiskSize, DilatationDiskSize, crop, minSize, maxSize)
+
+end
