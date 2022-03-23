@@ -5,7 +5,7 @@
 function [outputFilesPath, InfoVelFilenames, BSFilenames, ParticlesFilenames, MeanVelFilenames, ...
     SedFilenames, startFrame, endFrame] = S3dir()
 
-outputFilesPath = uigetdir('D:\45fps\202202211456\Output', 'Path where Output matfiles are stored');
+outputFilesPath = uigetdir('G:\Calibration bed load', 'Path where Output matfiles are stored');
         
 InfoVelFilenames = dir(fullfile(outputFilesPath, 'AllInfoVel_*.mat'));
 BSFilenames = dir(fullfile(outputFilesPath, 'BS_*.mat'));

@@ -32,11 +32,14 @@ disp('Done sediment discharge per frame')
 
 window = 1;
 normplot = 'no';
-plotTimeSeries(BS,'BS', normplot, window, fps)
-plotTimeSeries(Sediment,'Sediment', normplot, window, fps)
-plotTimeSeries(MeanVel,'MeanVel',normplot, window, fps)
+% plotTimeSeries(BS,'BS', normplot, window, fps)
+% plotTimeSeries(Sediment,'Sediment', normplot, window, fps)
+% plotTimeSeries(MeanVel,'MeanVel',normplot, window, fps)
+
 
 meanBS = mean(BS(:,2))
 meanSed = mean(Sediment(:,2), 'omitnan')
+
 sumBS = sum(BS(:,2))
 sumSed = sum(Sediment(:,2), 'omitnan')
+
