@@ -1,15 +1,8 @@
-%% Step 1 - Image filtering for a batch
-
-% This script applies the filtering to RAW images obtained from video acquisition. It works for several matfiles
-% in the same folder or for a single file.
-% It requires:
-% * FiltersFunction: function with all filters to be applied.
-% * Directory of the folder containing the videos
-% -----------------------------------------------------------------------------------------------------------
+%% Step 1 and Step 2 - Image filtering and matching for a batch
 
 close all;  % Close all windows
 clear all;  % Clear the workspace
-% clc         % Clear console
+clc         % Clear console
 
 %% Filtering setup
 % We define the different parameters used by the functions.
@@ -31,7 +24,8 @@ camera  = "Halle"; % Options: LESO, office, laptop, Halle.
 
 % For loop over all subfolders containing RAW images.
 for i = 1:length(subFolders)
-
+    
+    % Bedload computation step
     filesPath = fullfile(foldersPath, subFolders(i).name,'RAW_matfiles');
     
     fprintf('\n------------------------------------------\n\n')
@@ -45,9 +39,32 @@ for i = 1:length(subFolders)
     if ~exist(FilteredPath, 'dir')
         mkdir(FilteredPath)
     end
-    
+
     Filtering(filesPath, filenames, FileType, ProcessingMode, FilteredPath, ...
         xdim, ydim, x_0, x_end, y_0, y_end, ...
         GaussFilterSigma, FilterDiskSize, DilatationDiskSize, crop, minSize, maxSize)
+
+    % Bedload computation step
+
+    filesPath = fullfile(foldersPath, subFolders(i).name,'Filtered');
+
+    fprintf('\n------------------------------------------\n\n')
+    disp(subFolders(i).name)
+    fprintf('\n------------------------------------------\n\n')
+
+    filenames = dir(fullfile(filesPath, '*.mat'));
+    OutputPath = fullfile(filesPath, '..', 'Output');
+
+    % If the saving folder does not exist, it makes it
+    if ~exist(OutputPath, 'dir')
+        mkdir(OutputPath)
+    end
+
+    Matching(camera, filesPath, filenames, OutputPath, ProcessingMode, skip, distMinIsol, ...
+        areamin, areamax, lim_width, lim_height, distMinVel, distMaxVel, difs_th, x_dev, fps,...
+        imheight, imwidth, maxparticles);
+
+    Discharge_computation(OutputPath, fps, imheight, imwidth);
+    
 
 end

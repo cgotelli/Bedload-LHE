@@ -10,7 +10,7 @@ if isempty(p) && n~=1 % If it's empty and the number of cores is not set to one.
     
 end
 
-foldersPath = uigetdir('G:\', 'Path where folders with RAW Images matfiles are stored');
+foldersPath = uigetdir('G:\', 'Path where folders with Filtered Images matfiles are stored');
 d = dir(foldersPath);
 subFolders  = d([d(:).isdir]);
 subFolders = subFolders(~ismember({subFolders(:).name},{'.','..'}));

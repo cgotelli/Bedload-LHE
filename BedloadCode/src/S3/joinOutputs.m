@@ -1,10 +1,7 @@
 
 
-function joinedData = joinOutputs(filesCell)
+function [fileName, joinedData] = joinOutputs(filesCell)
 
-dataName = split(filesCell(1).name,'_');
-dataName = dataName{1};
-FileName = strcat('Joined_',dataName);
 joinedData = [];
 experimentName = split(filesCell(1).folder,'\');
 experimentName = experimentName{end-1};
@@ -39,6 +36,6 @@ for i = 1:length(filesCell)
     joinedData = [joinedData; ones(length(data),1)*i, data(:,:)];
     
 end
-
-save(fullfile(filesCell(1).folder, '..', strcat(experimentName, '_', arrayName,".mat")), 'joinedData' ,'-v7.3')
+fileName = fullfile(filesCell(1).folder, '..', strcat(experimentName, '_', arrayName,".mat"));
+save(fileName, 'joinedData' ,'-v7.3')
 end

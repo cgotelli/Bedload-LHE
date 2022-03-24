@@ -1,8 +1,8 @@
-function plot_velocity(velocity, img, frame)
+function plot_velocity(velocity, data_filtered, frame)
 
 v       = velocity(velocity(:,1)==frame,:);
-img1    = img(:,:,frame);
-img2    = img(:,:,frame+1);
+img1    = data_filtered(:,:,frame);
+img2    = data_filtered(:,:,frame+1);
 
 figure();
 subplot(211);

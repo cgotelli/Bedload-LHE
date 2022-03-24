@@ -14,18 +14,22 @@ camera = "Halle";
 
 fps = 45; % Image acquisition fps in the lab
 
-[outputFilesPath, InfoVelFilenames, BSFilenames, ParticlesFilenames, MeanVelFilenames, SedFilenames, ...
+[outputFilesPath, InfoVelFiles, BSFiles, ParticlesFiles, MeanVelFiles, SedFiles, ...
     startFrame, endFrame] = S3dir;
 
-VelDetail = joinOutputs(InfoVelFilenames);
-disp('Done velocity computing information per frame')
-BS = joinOutputs(BSFilenames);
+% [Particles_fileName, Particles] = joinOutputs(ParticlesFiles);
+% disp('Done velocity computing information per frame')
+
+% [VelDetail_fileName, VelDetail] = joinOutputs(InfoVelFiles);
+% disp('Done velocity computing information per frame')
+% 
+[BS_fileName, BS] = joinOutputs(BSFiles);
 disp('Done black surface per frame')
-% Particles = joinOutputs(ParticlesFilenames);
-% disp('Done with (all) particles information per frame')
-MeanVel = joinOutputs(MeanVelFilenames);
-disp('Done mean velocity per frame')
-Sediment = joinOutputs(SedFilenames);
+% 
+% [MeanVel_fileName, MeanVel] = joinOutputs(MeanVelFiles);
+% disp('Done mean velocity per frame')
+
+[Sediment_fileName, Sediment] = joinOutputs(SedFiles);
 disp('Done sediment discharge per frame')
 
 %%
