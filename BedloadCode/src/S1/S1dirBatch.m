@@ -12,7 +12,7 @@ end
 foldersPath = uigetdir('G:\', 'Path where folders with RAW Images matfiles are stored');
 d = dir(foldersPath);
 subFolders  = d([d(:).isdir]);
-subFolders = subFolders(~ismember({subFolders(:).name},{'.','..'}));
+subFolders = subFolders(~ismember({subFolders(:).name},{'.', '..', 'runSummary'}));
 
 
 end
