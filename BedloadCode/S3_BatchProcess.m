@@ -8,15 +8,15 @@
 clear all;
 close all;
 
-camera = "Halle";
-
-fps = 45; % Image acquisition fps in the lab
-
 [foldersPath, subFolders] = S3dirBatch();
 
 if ~exist(fullfile(foldersPath, 'runSummary'), 'dir')
     mkdir(fullfile(foldersPath, 'runSummary'))
 end
+
+tsBS        = [];
+tsSediment  = [];
+tsMeanVel   = [];
 
 for i = 1:length(subFolders)
 
@@ -34,10 +34,10 @@ for i = 1:length(subFolders)
     MeanVelFiles    = dir(fullfile(outputFilesPath, 'MeanVel_*.mat'));
     SedFiles        = dir(fullfile(outputFilesPath, 'Sed_*.mat'));
 
-
-
     [BS_fileName, BS] = joinOutputs(BSFiles);
     copyfile(BS_fileName, fullfile(foldersPath, 'runSummary'))
+    tsBS = [tsBS; BS];
+    save(fullfile(foldersPath, 'runSummary', 'tsBS.mat'), 'tsBS' ,'-v7.3');
     disp('Done black surface per frame')
 
     [VelDetail_fileName, VelDetail] = joinOutputs(InfoVelFiles);
@@ -46,11 +46,16 @@ for i = 1:length(subFolders)
 
     [MeanVel_fileName, MeanVel] = joinOutputs(MeanVelFiles);
     copyfile(MeanVel_fileName, fullfile(foldersPath, 'runSummary'))
+    tsMeanVel = [tsMeanVel; MeanVel];
+    save(fullfile(foldersPath, 'runSummary', 'tsMeanVel.mat'), 'tsMeanVel' ,'-v7.3');
     disp('Done mean velocity per frame')
 
     [Sediment_fileNamem, Sediment] = joinOutputs(SedFiles);
     copyfile(Sediment_fileNamem, fullfile(foldersPath, 'runSummary'))
+    tsSediment = [tsSediment; Sediment];
+    save(fullfile(foldersPath, 'runSummary', 'tsSediment.mat'), 'tsSediment' ,'-v7.3');
     disp('Done sediment discharge per frame')
+    
 
 end
 
