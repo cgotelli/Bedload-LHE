@@ -11,12 +11,12 @@ dt = 1/fps; % Delta time between frames.
 
 if strcmp(ProcessingMode, 'select') % For selected matfiles
     
-    parfor j = 1:length(filenames)
+    for j = 1:length(filenames)
         
         name    = fullfile(filesPath, filenames{j});
         images  = load(name);
         images  = images.data_filtered;
-        
+        numFrames = size(images, 3);
         disp(strcat('Processing file', " -------> ", filenames{j}))         % Prints file name
         
         particles_data = Particle_detection(images, SavePath, filenames{j}); % Detects all particles
@@ -28,7 +28,7 @@ if strcmp(ProcessingMode, 'select') % For selected matfiles
         
         disp(strcat('We passed the particle filtering' , " -------> " , filenames{j}))
         
-        Mean_vel(camera, final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...
+        Mean_vel(camera, numFrames, final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...
             SavePath, filenames{j}); % Computes velocity 
         
         disp(strcat('We passed mean velocity computation' , " -------> " , filenames{j}))

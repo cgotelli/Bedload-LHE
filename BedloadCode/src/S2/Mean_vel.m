@@ -5,10 +5,10 @@
 % - It returns the velocitiy of each particle frame by frame, and the mean velocity of this particles also
 % frame by frame.
 
-function [velocity, mvel] = Mean_vel(camera, final_particles, distMin, distMax, dt, difs_th, x_dev, ...
+function [velocity, mvel] = Mean_vel(camera, numFrames ,final_particles, distMin, distMax, dt, difs_th, x_dev, ...
     SavePath, filename)
 
-num_frames  = final_particles(end,1,1); % Total number of frames to process
+num_frames  = numFrames; % Total number of frames to process
 pairs       = [];                       % Empty array for pairs of particles
 mvel        = zeros(num_frames-1,1);    % Empty array for mean velocity (the last frame is not counted as there is no num_frames+1 frame to compute the velocity)
 

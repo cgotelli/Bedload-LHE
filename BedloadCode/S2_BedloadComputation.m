@@ -11,7 +11,7 @@
 % clear all;
 close all;
 % clc
-
+dbstop if error
 %% Computation setup
 
 ProcessingMode = 'all'; % "select" or "all" folders
