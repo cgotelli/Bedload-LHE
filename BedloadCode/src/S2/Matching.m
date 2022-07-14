@@ -40,10 +40,12 @@ if strcmp(ProcessingMode, 'select') % For selected matfiles
 elseif strcmp(ProcessingMode, 'all') % For all matfiles in the folder
     
     parfor j = 1:length(filenames)
+%     for j = 1:length(filenames)
 
         name    = fullfile(filesPath, filenames(j).name);
         images  = load(name);
         images  = images.data_filtered;
+        numFrames = size(images, 3);
         
         disp(strcat(num2str(j), " Processing file -------> " , filenames(j).name))
         
@@ -60,7 +62,7 @@ elseif strcmp(ProcessingMode, 'all') % For all matfiles in the folder
             
             disp(strcat(num2str(j), " We passed the particle filtering -------> " , filenames(j).name))
             
-            Mean_vel(camera, final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...
+            Mean_vel(camera, numFrames, final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...
                 SavePath, filenames(j).name); % Computes velocity and returns the mean velocity in an array
             
             disp(strcat(num2str(j), " We passed the mean velocity computation -------> " , filenames(j).name))

@@ -87,7 +87,7 @@ elseif camera == "laptop" % Clemente's ASUS personal laptop
 
 elseif camera == "Halle" % Main channel parameters. To be calibrated.
 
-    %     % Camera's resolution
+        % Camera's resolution
     xres        = 2712;  % Image's width
     yres        = 500;  % Image's height
     xoffset     = 640;    % yoffset + ydim = total picture height
@@ -96,12 +96,13 @@ elseif camera == "Halle" % Main channel parameters. To be calibrated.
     vid = videoinput('gentl', 1, 'Mono8');
     src = getselectedsource(vid);
     
-    
+    src.AcquisitionFrameRateEnable = 'True';
     src.AcquisitionFrameRate = fps;
     src.AutoGainUpperLimit = 24;
     src.BlackLevel = 0.9375;
-    src.Gain = 11.9;
+    src.Gain = 13;
     src.Gamma = 0.6829833984375;
+    src.ExposureTime = 700;
     
     triggerconfig(vid, 'immediate');
     vid.FramesPerTrigger = Inf;
