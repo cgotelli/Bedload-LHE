@@ -14,7 +14,7 @@ clear all;  % Clear the workspace
 %% Filtering setup
 % We define the different parameters used by the functions.
 FileType    = 'matfile';   % Choose in what format are the RAW images: "matfile" or "video"
-n           = 8;                % number of cores to use
+n                  = 8;                % number of cores to use
 
 % Choose which elements to process: "select" for specific ones, or "all" for everything inside a folder.
 ProcessingMode = 'all';
@@ -39,7 +39,8 @@ for i = 1:length(subFolders)
     fprintf('\n------------------------------------------\n\n')
 
     filenames = dir(fullfile(filesPath, '*.mat'));
-    FilteredPath = fullfile(filesPath, '..', 'Filtered');
+    FilteredPath = fullfile(filesPath, '..',strcat( fileparts(filesPath(end-24:end)),'_Filtered' ));
+    %FilteredPath = fullfile(filesPath, '..', 'Filtered');
 
     % If the saving folder does not exist, it makes it
     if ~exist(FilteredPath, 'dir')
