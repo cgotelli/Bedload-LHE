@@ -18,13 +18,13 @@ ProcessingMode = 'all'; % "select" or "all" folders
 
 % What camera are we processing?
 camera = "Halle";       % Options: LESO, office, laptop, Halle.
-
+filtrar = true;     % Set to true to filter partices by size in the binary image counting (BS)
 n      = 8;             % number of cores to use
 skip   = 1;             % number of matfiles to skip for velocity computation. One each "skip" files.
 
 % Loading parameters depending on source of images
 [maxparticles, fps, distMaxVel, distMinVel, distMinIsol, areamin, areamax, difs_th, x_dev, ...
-    lim_width, lim_height, imwidth, imheight] = paramsComputation(camera);
+    lim_width, lim_height, imwidth, imheight,lowrange, toprange] = paramsComputation(camera);
 
 % Determines files' directories & creates folder to export filtered images
 [foldersPath, subFolders] = S2dirBatch(n);
@@ -48,7 +48,7 @@ for i = 1:length(subFolders)
 
     Matching(camera, filesPath, filenames, OutputPath, ProcessingMode, skip, distMinIsol, ...
         areamin, areamax, lim_width, lim_height, distMinVel, distMaxVel, difs_th, x_dev, fps,...
-        imheight, imwidth, maxparticles);
+        imheight, imwidth, maxparticles, filtrar, lowrange, toprange);
 
     %Discharge_computation(OutputPath, fps, imheight, imwidth);
 
