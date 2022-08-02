@@ -12,7 +12,7 @@ close all;
 
 camera = "Halle";
 
-fps = 45; % Image acquisition fps in the lab
+fps = 50; % Image acquisition fps in the lab
 
 [outputFilesPath, InfoVelFiles, BSFiles, ParticlesFiles, MeanVelFiles, SedFiles, ...
     startFrame, endFrame] = S3dir;

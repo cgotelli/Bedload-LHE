@@ -23,15 +23,15 @@ if strcmp(ProcessingMode, 'select') % For selected matfiles
         
         disp(strcat('We passed the particle detection', " -------> ", filenames{j}))
         
-        final_particles = Particle_filtering(particles_data, imheight, imwidth, distMinIsol, areamin, areamax, ...
-            lim_width, lim_height, maxparticles); % Filter the best particles for computing mean particle's velocity.
+%         final_particles = Particle_filtering(particles_data, imheight, imwidth, distMinIsol, areamin, areamax, ...
+%             lim_width, lim_height, maxparticles); % Filter the best particles for computing mean particle's velocity.
+%         
+%         disp(strcat('We passed the particle filtering' , " -------> " , filenames{j}))
         
-        disp(strcat('We passed the particle filtering' , " -------> " , filenames{j}))
+%         Mean_vel(camera, numFrames, final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...
+%             SavePath, filenames{j}); % Computes velocity 
         
-        Mean_vel(camera, numFrames, final_particles, distMinVel, distMaxVel, dt, difs_th, x_dev, ...
-            SavePath, filenames{j}); % Computes velocity 
-        
-        disp(strcat('We passed mean velocity computation' , " -------> " , filenames{j}))
+%         disp(strcat('We passed mean velocity computation' , " -------> " , filenames{j}))
                 
         Black_surface(images, imheight, imwidth, SavePath, filenames{j}); % Returns am array with the number of black pixels by frame
         

@@ -19,7 +19,7 @@ ProcessingMode = 'all'; % "select" or "all" folders
 % What camera are we processing?
 camera = "Halle";       % Options: LESO, office, laptop, Halle.
 
-n      = 2;             % number of cores to use
+n      = 8;             % number of cores to use
 skip   = 1;             % number of matfiles to skip for velocity computation. One each "skip" files.
 
 % Loading parameters depending on source of images
@@ -50,6 +50,6 @@ for i = 1:length(subFolders)
         areamin, areamax, lim_width, lim_height, distMinVel, distMaxVel, difs_th, x_dev, fps,...
         imheight, imwidth, maxparticles);
 
-    Discharge_computation(OutputPath, fps, imheight, imwidth);
+    %Discharge_computation(OutputPath, fps, imheight, imwidth);
 
 end
