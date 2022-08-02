@@ -133,7 +133,6 @@ elseif strcmp(FileType, 'video') % Only for one file
                 
             end
         end
-        
     end
     
 end
