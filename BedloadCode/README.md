@@ -8,4 +8,4 @@ The workflow for computing the bedload consists of five steps:
 
 
 
-Special thanks to the students who helped to improve the algorithm implementation and calibration: Maxime Dunod & Matthieu Rykner, both students from EPFL. 
+Special thanks to the students who helped to improve the algorithm implementation and calibration: Maxime Dunod, Matthieu Rykner & Timothée Ponsort.
