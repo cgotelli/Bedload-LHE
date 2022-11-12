@@ -1,3 +1,4 @@
+
 % Black_surface
 % Calculates the black area corresponding to the particles surface
 % - It receives the array of filtered images, the resolution of images, the folder's path where to export the

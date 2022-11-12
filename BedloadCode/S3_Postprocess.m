@@ -29,8 +29,8 @@ disp('Done black surface per frame')
 % [MeanVel_fileName, MeanVel] = joinOutputs(MeanVelFiles);
 % disp('Done mean velocity per frame')
 
-[Sediment_fileName, Sediment] = joinOutputs(SedFiles);
-disp('Done sediment discharge per frame')
+% [Sediment_fileName, Sediment] = joinOutputs(SedFiles);
+% disp('Done sediment discharge per frame')
 
 %%
 
@@ -42,8 +42,8 @@ normplot = 'no';
 
 
 meanBS = mean(BS(:,2))
-meanSed = mean(Sediment(:,2), 'omitnan')
+% meanSed = mean(Sediment(:,2), 'omitnan')
 
 sumBS = sum(BS(:,2))
-sumSed = sum(Sediment(:,2), 'omitnan')
+% sumSed = sum(Sediment(:,2), 'omitnan')
 

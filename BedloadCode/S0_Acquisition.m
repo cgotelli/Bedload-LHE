@@ -32,7 +32,7 @@ camera   = "Halle";     % Options: LESO, office, laptop, Halle. Edit InitiateVid
 n   = 8;                % number of cores to use. Recommended at least two.
 
 % Image acquisition
-fps         = 50;       % number of FPS
+fps         = 25;       % number of FPS
 saveFrames  = 'n';      % Want to save the original frames? (y or n)
 extension   = 'bmp';    % Extension format for exporting images: 'tiff', 'jpeg', 'bmp', 'png'
 EachHowMany = fps*10;    % How many frames will have each matfile. Number = fps * #seconds (5 in this case).

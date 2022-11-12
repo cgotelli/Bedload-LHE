@@ -18,7 +18,7 @@ end
 c = clock;
 
 % Asks for the directory where to store the RAW images.
-savePath = uigetdir('D:\', 'Select where to save the RAW images data');
+savePath = uigetdir('G:\', 'Select where to save the RAW images data');
 
 % In the given paths creates a folder with the starting time in the name
 mainFolder = fullfile(savePath, strcat(sprintf('%d',c(1)), sprintf('%02.0f',c(2)), sprintf('%02.0f', ...
