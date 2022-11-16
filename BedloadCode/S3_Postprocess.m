@@ -12,7 +12,7 @@ close all;
 
 camera = "Halle";
 
-fps = 50; % Image acquisition fps in the lab
+fps = 25; % Image acquisition fps in the lab
 
 [outputFilesPath, InfoVelFiles, BSFiles, ParticlesFiles, MeanVelFiles, SedFiles, ...
     startFrame, endFrame] = S3dir;
@@ -34,9 +34,9 @@ disp('Done black surface per frame')
 
 %%
 
-window = 1;
-normplot = 'no';
-% plotTimeSeries(BS,'BS', normplot, window, fps)
+window = 25;
+normplot = 'yes';
+plotTimeSeries(BS,'BS', normplot, window, fps)
 % plotTimeSeries(Sediment,'Sediment', normplot, window, fps)
 % plotTimeSeries(MeanVel,'MeanVel',normplot, window, fps)
 

@@ -4,7 +4,8 @@ function [fileName, joinedData] = joinOutputs(filesCell)
 
 joinedData = [];
 experimentName = split(filesCell(1).folder,'\');
-experimentName = experimentName{end-1};
+experimentName = experimentName{end};
+
 
 for i = 1:length(filesCell)
     data = load(fullfile(filesCell(i).folder, filesCell(i).name));
