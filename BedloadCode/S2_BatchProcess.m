@@ -18,13 +18,8 @@ ProcessingMode = 'all'; % "select" or "all" folders
 
 % What camera are we processing?
 camera = "Halle";       % Options: LESO, office, laptop, Halle.
-<<<<<<< Updated upstream
 filtrar = true;     % Set to true to filter partices by size in the binary image counting (BS)
 n      = 8;             % number of cores to use
-=======
-filtrar = false;     % Set to true to filter partices by size in the binary image counting (BS)
-n      = 1;             % number of cores to use
->>>>>>> Stashed changes
 skip   = 1;             % number of matfiles to skip for velocity computation. One each "skip" files.
 
 % Loading parameters depending on source of images
