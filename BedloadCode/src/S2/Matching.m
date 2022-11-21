@@ -40,7 +40,7 @@ if strcmp(ProcessingMode, 'select') % For selected matfiles
 elseif strcmp(ProcessingMode, 'all') % For all matfiles in the folder
     
 %     parfor j = 1:length(filenames)
-    for j = 1:length(filenames)
+    parfor j = 1:length(filenames)
 
         name    = fullfile(filesPath, filenames(j).name);
         images  = load(name);

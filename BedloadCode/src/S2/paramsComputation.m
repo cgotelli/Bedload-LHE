@@ -18,7 +18,7 @@ if strcmp(camera, "Halle")
     imwidth     = 2712;         % image width
     imheight    = 500;           % image height
     lowrange = 0;                  % Low range for particle size filtering in black surface computation
-    toprange = 100;             % Top range for particle size filtering in black surface computation
+    toprange = 150;             % Top range for particle size filtering in black surface computation
 elseif strcmp(camera, "LESO")
     
     maxparticles= 1000;           % Maximum number of particles to process by frame (~15)

@@ -32,14 +32,15 @@ skip   = 1;             % number of matfiles to skip for velocity computation. O
 % For loop over all subfolders containing filtered images.
 for i = 1:length(subFolders)
 
-    filesPath = fullfile(foldersPath, subFolders(i).name,strcat(subFolders(i).name,'_Filtered'));
+    filesPath = fullfile(foldersPath, subFolders(i).name);
 
     fprintf('\n------------------------------------------\n\n')
     disp(subFolders(i).name)
+    disp(filesPath)
     fprintf('\n------------------------------------------\n\n')
 
     filenames = dir(fullfile(filesPath, '*.mat'));
-    OutputPath = fullfile(filesPath, '..', 'Output');
+    OutputPath = fullfile(filesPath, '..', strcat(subFolders(i).name(1:12), '_Output'));
 
     % If the saving folder does not exist, it makes it
     if ~exist(OutputPath, 'dir')

@@ -10,7 +10,7 @@ if isempty(p) && n~=1 % If it's empty and the number of cores is not set to one.
     
 end
 
-foldersPath = uigetdir('G:\', 'Path where folders with for different measurements are stored');
+foldersPath = uigetdir('E:\00.EXPERIMENTS\00_bedload', 'Path where folders with for different measurements are stored');
 d = dir(foldersPath);
 subFolders  = d([d(:).isdir]);
 subFolders = subFolders(~ismember({subFolders(:).name},{'.', '..', 'runSummary'}));

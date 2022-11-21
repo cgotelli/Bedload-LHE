@@ -63,7 +63,7 @@ elseif strcmp(FileType, 'video') % If we want to process videos
     
 end
 
-FilteredPath = fullfile(filesPath, '..',strcat( fileparts(filesPath(end-24:end)),'_Filtered' ));
+FilteredPath = fullfile(filesPath, '..',strcat('Filtered_', fileparts(filesPath(end-24:end))));
 
 % If the saving folder does not exist, it makes it
 if ~exist(FilteredPath, 'dir')

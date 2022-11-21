@@ -42,7 +42,7 @@ elseif strcmp(ProcessingMode, 'all')
 end
 
 % If the saving folder does not exist, makes it
-SavePath = fullfile(filesPath, '..', 'Output');
+SavePath = fullfile(filesPath, '..', strcat(filesPath(end-21:end-9), '_Output'));
 
 if ~exist(SavePath, 'dir')
     
