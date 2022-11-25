@@ -16,7 +16,7 @@ if strcmp(camera, "Halle")
     lim_width   = 0.05;         % fraction of the image to exclude in the x axis for each border.
     lim_height  = 0.05;         % fraction of the image to exclude in the y axis for each border. 
     imwidth     = 2712;         % image width
-    imheight    = 500;           % image height
+    imheight    = 300;           % image height
     lowrange = 0;                  % Low range for particle size filtering in black surface computation
     toprange = 150;             % Top range for particle size filtering in black surface computation
 elseif strcmp(camera, "LESO")
