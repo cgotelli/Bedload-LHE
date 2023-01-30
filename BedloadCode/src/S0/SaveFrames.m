@@ -22,8 +22,7 @@ end
 % For the first frame it register the time in the LogFile.
 if metadata(1).RelativeFrame == 1
 
-    fprintf(fid, '%010.0f %02.0f %02.0f %05.2f', metadata(1).FrameNumber, metadata(1).AbsTime(4:6));
-
+    fprintf(fid,'\n%s %010.0f', datetime(metadata(1).AbsTime(),"Format","uuuuMMdd'T'HHmmss"), metadata(1).FrameNumber);
 end
 
 % Evaluates the Handle Function "@filtering" in parallel. Check this link for mor information:
@@ -37,7 +36,6 @@ f = parfeval(@FrameToMatfile, 0, data, matfilesPath, metadata);
 obj.UserData = data;
 
 % After it stores the data into matfiles, it registers the exact time when it did it.
-fprintf(fid, '\n%010.0f %02.0f %02.0f %05.2f', metadata(numel(metadata)).FrameNumber, ...
-    metadata(numel(metadata)).AbsTime(4:6));
+fprintf(fid,'\n%s %010.0f', datetime(metadata(numel(metadata)).AbsTime(),"Format","uuuuMMdd'T'HHmmss"), metadata(numel(metadata)).FrameNumber);
 
 end
